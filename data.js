@@ -1,4 +1,5 @@
-/* 자동 생성 — 데이터랩 산출 항목 (엔진 v1.1, 2026-08-13, 9개 지역) */
+/* 자동 생성 — 데이터랩 산출 항목 (엔진 v1.2, 2026-08-13)
+   '사람의 한국'은 외래관광객조사 만족요인 기반 질적 큐레이션 카테고리 */
 const CATS = [
  {
   "icon": "🏛️",
@@ -225,6 +226,56 @@ const CATS = [
     "en": "Countryside 5-day market",
     "w": 5,
     "region": "jeonnam",
+    "hint": ""
+   }
+  ]
+ },
+ {
+  "icon": "🗣️",
+  "n": "사람의 한국",
+  "e": "The Human Korea",
+  "d": "말 한마디가 여행을 바꿉니다 — 진짜 한국은 대화 속에 있으니까 · Real Korea lives in conversations",
+  "items": [
+   {
+    "t": "식당 나올 때 \"잘 먹었습니다!\"",
+    "en": "Say \"jal meogeosseumnida!\" (I ate well!) on your way out",
+    "w": 4,
+    "region": null,
+    "hint": "이 한마디에 사장님 표정이 바뀝니다 · Watch the owner's face light up"
+   },
+   {
+    "t": "사장님·이모님께 메뉴 추천받기 — \"뭐가 맛있어요?\"",
+    "en": "Ask the owner \"mwoga masisseoyo?\" — what's good here?",
+    "w": 4,
+    "region": null,
+    "hint": ""
+   },
+   {
+    "t": "시장에서 '서비스(덤)' 받아보기",
+    "en": "Get free \"service\" at a market — Korea's bonus culture",
+    "w": 5,
+    "region": null,
+    "hint": "단골 같아 보여야 나옵니다 · You earn it by feeling like a regular"
+   },
+   {
+    "t": "사투리 한마디 배우기 (부산 \"마!\" · 제주 방언)",
+    "en": "Pick up dialect — Busan satoori or Jeju words",
+    "w": 5,
+    "region": null,
+    "hint": "표준어만 알면 한국의 절반만 아는 것 · Standard Korean is only half of Korea"
+   },
+   {
+    "t": "노래방에서 한국 노래 한 곡",
+    "en": "Sing one Korean song at a noraebang",
+    "w": 4,
+    "region": null,
+    "hint": ""
+   },
+   {
+    "t": "카페에서 한국어로 주문 성공",
+    "en": "Order in Korean at a café — and get understood",
+    "w": 3,
+    "region": null,
     "hint": ""
    }
   ]

@@ -306,7 +306,7 @@ document.getElementById("submitBtn").addEventListener("click", () => {
   document.getElementById("nextTrip").innerHTML = gain > 0
     ? `<b>One more trip = +${gain}%p</b><p>Complete the 5 things below and your map hits ${Math.min(100, p + gain)}%.<br>다음 한 번의 여행으로 지도가 ${Math.min(100, p + gain)}%가 됩니다.</p>`
     : `<b>지도를 완성하셨습니다</b><p>이제 계절을 바꿔 다시 오세요. · Now come back in a different season.</p>`;
-  const colors = { "첫 번째 한국": "#4d7c57", "연결된 한국": "#2a5d8f", "데이터가 찾은 숨은 곳": "#b98a2f", "밤의 한국": "#4a4066", "사는 사람의 한국": "#c08f2e", "계절의 한국": "#c73e3a" };
+  const colors = { "첫 번째 한국": "#4d7c57", "연결된 한국": "#2a5d8f", "데이터가 찾은 숨은 곳": "#b98a2f", "밤의 한국": "#4a4066", "사는 사람의 한국": "#c08f2e", "사람의 한국": "#a8556e", "계절의 한국": "#c73e3a" };
   document.getElementById("missedList").innerHTML = missed.slice(0, 5).map(m =>
     `<div class="mc"><span class="tag" style="background:${colors[m.c.n] || '#666'}">${m.c.n}</span><span class="tx">${m.it.en}<small>${m.it.t}</small></span></div>`).join("")
     || "<p style='font-size:13px'>모두 채우셨군요.</p>";
