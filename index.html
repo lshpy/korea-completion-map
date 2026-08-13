@@ -11,16 +11,14 @@
 <style>
 :root{
   --ink:#191922; --sub:#71717c; --bg:#f4f2ee; --card:#ffffff; --line:#e6e3dd;
-  --red:#c73e3a; --blue:#2a5d8f; --gold:#c08f2e; --green:#4d7c57; --night:#4a4066;
-  --empty:#e9e6df;
+  --red:#c73e3a; --blue:#2a5d8f; --gold:#c08f2e; --green:#4d7c57;
+  --empty:#e7e4dc;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);line-height:1.55}
-.app{max-width:460px;margin:0 auto;min-height:100vh;background:var(--bg);position:relative}
-
-/* 앱 상단바 */
+.app{max-width:460px;margin:0 auto;min-height:100vh;position:relative}
 .topbar{position:sticky;top:0;z-index:20;background:rgba(244,242,238,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:14px 18px}
-.topbar .name{font-weight:800;font-size:15.5px;letter-spacing:-.01em}
+.topbar .name{font-weight:800;font-size:15.5px}
 .topbar .name small{display:block;font-size:10.5px;color:var(--sub);font-weight:600;letter-spacing:.08em;text-transform:uppercase}
 .ring{position:relative;width:44px;height:44px;flex:none}
 .ring svg{transform:rotate(-90deg)}
@@ -28,25 +26,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretend
 .ring .bgc{stroke:#e5e2db}
 .ring .fgc{stroke:var(--red);stroke-linecap:round;transition:stroke-dashoffset .5s}
 .ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:11px;font-weight:800}
-
 .pad{padding:20px 18px 120px}
 .hero{text-align:center;padding:18px 0 6px}
 .hero h1{font-size:clamp(24px,7vw,30px);font-weight:900;letter-spacing:-.03em}
 .hero p{color:var(--sub);font-size:13.5px;margin-top:6px}
 .hero p b{color:var(--ink)}
 
-/* ── 타일 지도 ── */
-.mapbox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 14px 10px;margin:18px 0}
-.mapbox h2{font-size:13px;font-weight:800;color:var(--sub);letter-spacing:.06em;text-transform:uppercase;text-align:center}
-.kmap{position:relative;width:min(300px,80vw);height:calc(min(300px,80vw)*1.25);margin:10px auto 4px}
-.tile{position:absolute;border-radius:14px;background:var(--empty);border:1.5px solid #dcd8d0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;transition:all .45s cubic-bezier(.2,.8,.2,1);overflow:hidden}
-.tile .rn{font-size:12.5px;font-weight:800;color:#9b978e}
-.tile .re{font-size:9px;font-weight:600;color:#b3afa6;letter-spacing:.04em}
-.tile .stamp{font-size:16px;line-height:1;opacity:0;transform:scale(.3) rotate(-20deg);transition:all .4s cubic-bezier(.34,1.56,.64,1)}
-.tile.lit{border-color:transparent;box-shadow:0 6px 16px rgba(0,0,0,.10)}
-.tile.lit .rn{color:#fff}.tile.lit .re{color:rgba(255,255,255,.75)}
-.tile.lit .stamp{opacity:1;transform:scale(1) rotate(-8deg)}
-.maplegend{text-align:center;font-size:11.5px;color:var(--sub);padding-bottom:8px}
+/* ── 픽셀 한국 지도 ── */
+.mapbox{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px 12px 8px;margin:18px 0}
+.mapbox h2{font-size:13px;font-weight:800;color:var(--sub);letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-bottom:8px}
+.kwrap{position:relative;width:286px;margin:0 auto}
+.kmap{position:relative}
+.cell{position:absolute;width:24px;height:24px;border-radius:6px;background:var(--empty);transition:background .5s,box-shadow .5s,transform .3s}
+.cell.lit{box-shadow:0 3px 8px rgba(0,0,0,.15)}
+.rlabel{position:absolute;font-size:11px;font-weight:800;color:#8d897f;text-shadow:0 1px 2px rgba(255,255,255,.7);pointer-events:none;transform:translate(-50%,-50%);text-align:center;line-height:1.15;transition:color .4s;z-index:3}
+.rlabel small{display:block;font-size:8px;font-weight:600;letter-spacing:.03em}
+.rlabel.lit{color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.35)}
+.maplegend{text-align:center;font-size:11.5px;color:var(--sub);padding:10px 0 8px}
 
 /* 계절 여권 */
 .passport{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:16px;margin:16px 0}
@@ -55,7 +51,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretend
 .season{aspect-ratio:.82;border:1.5px dashed #d8d4cb;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;background:#faf9f6;transition:all .4s}
 .season .ic{font-size:22px;filter:grayscale(1);opacity:.35;transition:all .4s}
 .season .sn{font-size:11px;font-weight:700;color:#a5a19a}
-.season .se{font-size:8.5px;color:#bcb8b0;letter-spacing:.03em}
+.season .se{font-size:8.5px;color:#bcb8b0}
 .season.lit{border-style:solid;box-shadow:inset 0 0 0 1.5px currentColor}
 .season.lit .ic{filter:none;opacity:1;transform:scale(1.1)}
 .season.lit .sn{color:currentColor}
@@ -73,7 +69,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretend
 .item .t .en{display:block;font-size:12px;color:var(--sub);font-weight:500}
 .item .t .hint{display:block;font-size:11.5px;color:var(--gold);font-weight:600;margin-top:1px}
 
-/* CTA */
 .cta{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:460px;padding:12px 18px calc(14px + env(safe-area-inset-bottom));background:linear-gradient(transparent,var(--bg) 40%);z-index:30}
 .cta button{width:100%;border:0;border-radius:16px;padding:17px;font-size:16.5px;font-weight:800;background:var(--ink);color:#fff;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.18)}
 .cta button:active{transform:scale(.98)}
@@ -86,12 +81,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretend
 .rtitle{font-size:18px;font-weight:800;margin-top:8px}
 .rsub{font-size:13.5px;color:var(--sub);margin-top:3px}
 .rsub .en{display:block;font-size:12px}
+.nexttrip{margin-top:16px;background:linear-gradient(135deg,#fdf3ee,#f6ebf0);border:1.5px solid #ecd9cf;border-radius:16px;padding:14px}
+.nexttrip b{font-size:15.5px;color:var(--red)}
+.nexttrip p{font-size:12px;color:#8a6a5e;margin-top:3px}
 .missed h3{font-size:15.5px;font-weight:800;margin:20px 0 3px}
 .missed>p{font-size:12.5px;color:var(--sub);margin-bottom:10px}
 .mc{display:flex;gap:11px;align-items:flex-start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px 15px;margin:9px 0;border-left:4px solid var(--gold)}
-.mc .tag{flex:none;font-size:10px;font-weight:800;color:#fff;border-radius:6px;padding:3px 7px;margin-top:2px;letter-spacing:.02em}
+.mc .tag{flex:none;font-size:10px;font-weight:800;color:#fff;border-radius:6px;padding:3px 7px;margin-top:2px}
 .mc .tx{font-size:13.5px;font-weight:600}
 .mc .tx small{display:block;color:var(--sub);font-weight:500;font-size:11.5px}
+.wishbtn{width:100%;border:1.5px dashed var(--gold);background:#fdf9f2;color:#8a6a2e;border-radius:14px;padding:13px;font-size:14px;font-weight:800;cursor:pointer;margin-top:6px}
 .revisit{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:20px;margin:20px 0;text-align:center}
 .revisit h3{font-size:15px;margin-bottom:3px}
 .revisit p{font-size:12px;color:var(--sub);margin-bottom:12px}
@@ -117,14 +116,14 @@ footer{text-align:center;font-size:11px;color:var(--sub);padding:10px 0 30px;lin
 
   <div class="pad">
     <div class="hero">
-      <h1>당신의 한국은<br>얼마나 채워졌나요?</h1>
-      <p><b>Check what you've experienced.</b><br>경험한 것을 체크하면 지도가 채워집니다.</p>
+      <h1>How much of Korea<br>have you seen?</h1>
+      <p><b>Check what you've experienced — your map fills in.</b><br>경험한 것을 체크하면 당신의 한국 지도가 채워집니다.</p>
     </div>
 
     <div class="mapbox">
       <h2>My Korea Map</h2>
-      <div class="kmap" id="kmap"></div>
-      <div class="maplegend">빈 타일 = 아직 만나지 못한 한국 · Empty tiles = the Korea you haven't met</div>
+      <div class="kwrap"><div class="kmap" id="kmap"></div></div>
+      <div class="maplegend">Empty cells = the Korea you haven't met yet · 빈 칸 = 아직 만나지 못한 한국</div>
     </div>
 
     <div class="passport">
@@ -139,161 +138,204 @@ footer{text-align:center;font-size:11px;color:var(--sub);padding:10px 0 30px;lin
         <div class="rpct"><span id="finalPct">0</span><small>%</small></div>
         <div class="rtitle" id="rTitle"></div>
         <div class="rsub" id="rSub"></div>
+        <div class="nexttrip" id="nextTrip"></div>
       </div>
       <div class="missed">
-        <h3>당신이 놓친 것들 · What you missed</h3>
-        <p>한 번의 여행으로는 채울 수 없도록, 한국은 설계되어 있습니다.<br>Korea is designed to be impossible to finish in one trip.</p>
+        <h3>What you missed · 당신이 놓친 것들</h3>
+        <p>Korea is designed to be impossible to finish in one trip.<br>한 번의 여행으로는 채울 수 없도록 설계되어 있습니다.</p>
         <div id="missedList"></div>
+        <button class="wishbtn" id="wishBtn">📌 Save for my next trip · 다음 여행 위시리스트</button>
       </div>
       <div class="revisit">
-        <h3>이 지도를 보고 나니, 다시 오고 싶어졌나요?</h3>
-        <p>Now that you've seen your map — do you want to come back?</p>
+        <h3>Now that you've seen your map — do you want to come back?</h3>
+        <p>이 지도를 보고 나니, 다시 오고 싶어졌나요?</p>
         <div class="rv" id="rvBtns">
-          <button data-v="yes">🇰🇷 다음 방문 계획할래요 · Planning my next trip</button>
-          <button data-v="maybe">고민 중 · Maybe</button>
-          <button data-v="no">아니요 · No</button>
+          <button data-v="yes">🇰🇷 Planning my next trip · 다음 방문 계획</button>
+          <button data-v="maybe">Maybe · 고민 중</button>
+          <button data-v="no">No · 아니요</button>
         </div>
-        <div class="thanks" id="rvThanks">기록되었습니다. 다음 계절의 한국에서 만나요 · See you in Korea's next season.</div>
+        <div class="thanks" id="rvThanks">Saved. See you in Korea's next season · 다음 계절의 한국에서 만나요.</div>
       </div>
       <div class="sharebar">
-        <button class="pri" id="shareBtn">지도 공유하기 · Share</button>
-        <button id="retryBtn">다시 하기 · Retry</button>
+        <button class="pri" id="shareBtn">Share my map · 공유하기</button>
+        <button id="retryBtn">Retry · 다시 하기</button>
       </div>
     </div>
 
     <footer>
-      데이터 출처: 한국관광 데이터랩(한국관광공사) 공개 데이터 기반 설계<br>
-      Item weights are derived from Korea Tourism Data Lab: related-attraction pairs, seasonal peaks, night-tourism data. · 2026
+      데이터 출처: 한국관광 데이터랩(한국관광공사) 공식 공개 데이터 기반 설계<br>
+      Items & weights derived from Korea Tourism Data Lab: popularity, related-visit pairs, night-tourism data. · 2026
     </footer>
   </div>
 
-  <div class="cta" id="ctaBox"><button id="submitBtn">내 지도 완성하기 · See my map</button></div>
+  <div class="cta" id="ctaBox"><button id="submitBtn">See my map · 내 지도 보기</button></div>
 </div>
 
 <script src="data.js"></script>
 <script>
-/* ── 권역 타일 (한국 지형 배치, % 좌표) ── */
+/* ── 픽셀 한국 지도: 셀 좌표 (col,row) — 남한 실루엣 근사 ── */
+const CELL = 24, GAP = 2;
 const REGIONS = {
-  seoul:   {n:"서울",     e:"Seoul",    x:22, y:8,  w:34, h:16, c:"#c73e3a", s:"🏛️"},
-  gangwon: {n:"강원",     e:"Gangwon",  x:60, y:4,  w:36, h:22, c:"#4d7c57", s:"⛰️"},
-  chung:   {n:"충청",     e:"Chungcheong",x:18,y:28, w:36, h:16, c:"#b98a2f", s:"🏯"},
-  gyeongbuk:{n:"경북·경주",e:"Gyeongbuk",x:58, y:30, w:38, h:20, c:"#2a5d8f", s:"🪷"},
-  jeonbuk: {n:"전북·전주", e:"Jeonbuk",  x:14, y:48, w:34, h:16, c:"#8a5a44", s:"🍲"},
-  gyeongnam:{n:"부산·경남",e:"Busan",    x:56, y:54, w:40, h:18, c:"#3d6d99", s:"🌊"},
-  jeonnam: {n:"전남·광주", e:"Jeonnam",  x:12, y:68, w:36, h:16, c:"#5a7d4f", s:"🌾"},
-  jeju:    {n:"제주",     e:"Jeju",     x:20, y:90, w:26, h:10, c:"#c98a3a", s:"🍊"},
+  seoul:    {n:"서울·수도권", e:"Seoul", c:"#c73e3a", s:"🏛️", label:[2.0, 1.8],
+             cells:[[1,0],[2,0],[3,0],[1,1],[2,1],[3,1],[0,2],[1,2],[2,2],[3,2],[1,3],[2,3],[3,3]]},
+  gangwon:  {n:"강원", e:"Gangwon", c:"#4d7c57", s:"⛰️", label:[6.7, 1.6],
+             cells:[[4,0],[5,0],[6,0],[7,0],[8,0],[4,1],[5,1],[6,1],[7,1],[8,1],[9,1],[4,2],[5,2],[6,2],[7,2],[8,2],[9,2],[4,3],[5,3],[6,3],[7,3],[8,3]]},
+  chung:    {n:"충청", e:"Chungcheong", c:"#b98a2f", s:"🏯", label:[2.4, 5.1],
+             cells:[[0,4],[1,4],[2,4],[3,4],[4,4],[5,4],[0,5],[1,5],[2,5],[3,5],[4,5],[1,6],[2,6],[3,6],[4,6]]},
+  gyeongbuk:{n:"경북·경주", e:"Gyeongbuk", c:"#2a5d8f", s:"🪷", label:[7.3, 5.7],
+             cells:[[6,4],[7,4],[8,4],[5,5],[6,5],[7,5],[8,5],[9,5],[5,6],[6,6],[7,6],[8,6],[9,6],[6,7],[7,7],[8,7],[9,7]]},
+  jeonbuk:  {n:"전북·전주", e:"Jeonbuk", c:"#8a5a44", s:"🍲", label:[1.8, 7.6],
+             cells:[[0,7],[1,7],[2,7],[3,7],[0,8],[1,8],[2,8],[3,8]]},
+  gyeongnam:{n:"부산·경남", e:"Busan", c:"#3d6d99", s:"🌊", label:[6.2, 9.3],
+             cells:[[4,8],[5,8],[6,8],[7,8],[8,8],[9,8],[3,9],[4,9],[5,9],[6,9],[7,9],[8,9],[9,9],[4,10],[5,10],[6,10],[7,10],[8,10],[4,11],[5,11]]},
+  jeonnam:  {n:"전남·광주", e:"Jeonnam", c:"#5a7d4f", s:"🌾", label:[1.5, 10.6],
+             cells:[[0,9],[1,9],[2,9],[0,10],[1,10],[2,10],[3,10],[0,11],[1,11],[2,11],[3,11],[0,12],[1,12],[2,12]]},
+  jeju:     {n:"제주", e:"Jeju", c:"#c98a3a", s:"🍊", label:[1.7, 14.0],
+             cells:[[1,14],[2,14]]},
 };
-/* ── 계절 여권 ── */
 const SEASONS = {
   spring:{n:"봄",e:"Spring",ic:"🌸",c:"#d16a8a"}, summer:{n:"여름",e:"Summer",ic:"🌊",c:"#2a7fa8"},
   autumn:{n:"가을",e:"Autumn",ic:"🍁",c:"#c05c2e"}, winter:{n:"겨울",e:"Winter",ic:"❄️",c:"#5878a8"},
 };
-/* ── 항목: v1 잠정 가중치 — 데이터랩 검증 후 업데이트 ──
-   region: 지도 타일 / season: 여권 / w: 가중치 */
-// CATS는 data.js(데이터랩 산출)에서 주입됨
 
-/* ── 렌더 ── */
+/* 지도 렌더 */
 const kmap = document.getElementById("kmap");
-Object.entries(REGIONS).forEach(([k,r])=>{
-  const d = document.createElement("div");
-  d.className="tile"; d.id="tile-"+k;
-  d.style.cssText=`left:${r.x}%;top:${r.y}%;width:${r.w}%;height:${r.h}%`;
-  d.innerHTML=`<span class="stamp">${r.s}</span><span class="rn">${r.n}</span><span class="re">${r.e}</span>`;
-  kmap.appendChild(d);
+let maxRow = 0;
+Object.entries(REGIONS).forEach(([k, r]) => {
+  r.cells.forEach(([c, row], i) => {
+    const d = document.createElement("div");
+    d.className = "cell"; d.dataset.region = k;
+    d.style.left = (c * (CELL + GAP)) + "px";
+    d.style.top = (row * (CELL + GAP)) + "px";
+    kmap.appendChild(d);
+    if (row > maxRow) maxRow = row;
+  });
+  const lb = document.createElement("div");
+  lb.className = "rlabel"; lb.id = "rlabel-" + k;
+  lb.style.left = (r.label[0] * (CELL + GAP) + CELL / 2) + "px";
+  lb.style.top = (r.label[1] * (CELL + GAP) + CELL / 2) + "px";
+  lb.innerHTML = r.n + "<small>" + r.e + "</small>";
+  kmap.appendChild(lb);
 });
+kmap.style.height = ((maxRow + 1) * (CELL + GAP)) + "px";
+
+/* 계절 여권 렌더 */
 const seasonsEl = document.getElementById("seasons");
-Object.entries(SEASONS).forEach(([k,s])=>{
-  const d=document.createElement("div");
-  d.className="season"; d.id="season-"+k; d.style.color=s.c;
-  d.innerHTML=`<span class="ic">${s.ic}</span><span class="sn">${s.n}</span><span class="se">${s.e}</span>`;
+Object.entries(SEASONS).forEach(([k, s]) => {
+  const d = document.createElement("div");
+  d.className = "season"; d.id = "season-" + k; d.style.color = s.c;
+  d.innerHTML = `<span class="ic">${s.ic}</span><span class="sn">${s.n}</span><span class="se">${s.e}</span>`;
   seasonsEl.appendChild(d);
 });
-const quiz=document.getElementById("quiz");
-CATS.forEach((c,ci)=>{
-  const s=document.createElement("section"); s.className="cat";
-  s.innerHTML=`<h3>${c.icon} ${c.n} <span class="en">${c.e}</span></h3><p class="d">${c.d}</p>`+
-   c.items.map((it,ii)=>`<div class="item" data-c="${ci}" data-i="${ii}"><span class="cb">✓</span><span class="t">${it.t}<span class="en">${it.en}</span>${it.hint?`<span class="hint">${it.hint}</span>`:""}</span></div>`).join("");
+
+/* 체크리스트 렌더 (CATS는 data.js — 데이터랩 산출) */
+const quiz = document.getElementById("quiz");
+CATS.forEach((c, ci) => {
+  const s = document.createElement("section"); s.className = "cat";
+  s.innerHTML = `<h3>${c.icon} ${c.e} <span class="en">${c.n}</span></h3><p class="d">${c.d}</p>` +
+    c.items.map((it, ii) => `<div class="item" data-c="${ci}" data-i="${ii}"><span class="cb">✓</span><span class="t">${it.en}<span class="en">${it.t}</span>${it.hint ? `<span class="hint">${it.hint}</span>` : ""}</span></div>`).join("");
   quiz.appendChild(s);
 });
 
-const TOTAL = CATS.flatMap(c=>c.items).reduce((a,b)=>a+b.w,0);
+const TOTAL = CATS.flatMap(c => c.items).reduce((a, b) => a + b.w, 0);
 const state = new Set();
-function key(c,i){return c+"-"+i}
-quiz.addEventListener("click",e=>{
-  const el=e.target.closest(".item"); if(!el) return;
-  const k=key(el.dataset.c,el.dataset.i);
-  state.has(k)?state.delete(k):state.add(k);
+const key = (c, i) => c + "-" + i;
+quiz.addEventListener("click", e => {
+  const el = e.target.closest(".item"); if (!el) return;
+  const k = key(el.dataset.c, el.dataset.i);
+  state.has(k) ? state.delete(k) : state.add(k);
   el.classList.toggle("on");
   update();
 });
-function calc(){
-  let got=0; state.forEach(k=>{const[c,i]=k.split("-"); got+=CATS[+c].items[+i].w});
-  return Math.round(got/TOTAL*100);
+function calc() {
+  let got = 0; state.forEach(k => { const [c, i] = k.split("-"); got += CATS[+c].items[+i].w; });
+  return Math.round(got / TOTAL * 100);
 }
-function update(){
-  const p=calc();
-  document.getElementById("ringPct").textContent=p+"%";
-  document.getElementById("ringFg").style.strokeDashoffset=113-(113*p/100);
-  // 지도 타일
-  const regionHit={}, regionTot={};
-  CATS.forEach((c,ci)=>c.items.forEach((it,ii)=>{
-    if(!it.region) return;
-    regionTot[it.region]=(regionTot[it.region]||0)+1;
-    if(state.has(key(ci,ii))) regionHit[it.region]=(regionHit[it.region]||0)+1;
+function regionStats() {
+  const hit = {}, tot = {};
+  CATS.forEach((c, ci) => c.items.forEach((it, ii) => {
+    if (!it.region) return;
+    tot[it.region] = (tot[it.region] || 0) + 1;
+    if (state.has(key(ci, ii))) hit[it.region] = (hit[it.region] || 0) + 1;
   }));
-  Object.entries(REGIONS).forEach(([k,r])=>{
-    const t=document.getElementById("tile-"+k);
-    const hit=regionHit[k]||0, tot=regionTot[k]||1;
-    if(hit>0){ t.classList.add("lit"); const op=.45+.55*(hit/tot); t.style.background=r.c; t.style.opacity=op; }
-    else{ t.classList.remove("lit"); t.style.background=""; t.style.opacity=1; }
+  return { hit, tot };
+}
+function update() {
+  const p = calc();
+  document.getElementById("ringPct").textContent = p + "%";
+  document.getElementById("ringFg").style.strokeDashoffset = 113 - (113 * p / 100);
+  const { hit, tot } = regionStats();
+  Object.entries(REGIONS).forEach(([k, r]) => {
+    const h = hit[k] || 0, t = tot[k] || 1;
+    const on = h > 0, op = .45 + .55 * (h / t);
+    document.querySelectorAll(`.cell[data-region="${k}"]`).forEach(cell => {
+      cell.classList.toggle("lit", on);
+      cell.style.background = on ? r.c : "";
+      cell.style.opacity = on ? op : 1;
+    });
+    const lb = document.getElementById("rlabel-" + k);
+    if (lb) lb.classList.toggle("lit", on);
   });
-  // 계절 여권
-  CATS.forEach((c,ci)=>c.items.forEach((it,ii)=>{
-    if(!it.season) return;
-    document.getElementById("season-"+it.season).classList.toggle("lit",state.has(key(ci,ii)));
+  CATS.forEach((c, ci) => c.items.forEach((it, ii) => {
+    if (!it.season) return;
+    document.getElementById("season-" + it.season).classList.toggle("lit", state.has(key(ci, ii)));
   }));
 }
 
-const TITLES=[
- [0,"아직 만나기 전의 한국","Your Korea is still all in the future.","당신의 한국은 전부 미래에 있습니다."],
- [20,"관광객의 한국","You've seen the postcard. Not the country.","엽서는 봤지만, 나라는 아직입니다."],
- [45,"여행자의 한국","Impressive — but look at the empty tiles.","꽤 다녔네요. 그런데 빈 타일이 보이나요?"],
- [70,"거의 현지인","You probably have a favorite café here.","이 정도면 단골집이 있겠는데요."],
- [90,"한국이 그리운 사람","This score is impossible in one trip. You came back, didn't you?","이 점수는 한 번의 여행으론 불가능합니다. 당신, 또 왔었군요."],
+const TITLES = [
+ [0, "아직 만나기 전의 한국", "Your Korea is still all in the future.", "당신의 한국은 전부 미래에 있습니다."],
+ [20, "관광객의 한국", "You've seen the postcard. Not the country.", "엽서는 봤지만, 나라는 아직입니다."],
+ [45, "여행자의 한국", "Impressive — but look at the empty cells.", "꽤 다녔네요. 그런데 빈 칸이 보이나요?"],
+ [70, "거의 현지인", "You probably have a favorite café here.", "이 정도면 단골집이 있겠는데요."],
+ [90, "한국이 그리운 사람", "This score is impossible in one trip. You came back, didn't you?", "이 점수는 한 번의 여행으론 불가능합니다. 당신, 또 왔었군요."],
 ];
-document.getElementById("submitBtn").addEventListener("click",()=>{
-  const p=calc();
-  document.getElementById("finalPct").textContent=p;
-  const t=TITLES.filter(x=>p>=x[0]).pop();
-  document.getElementById("rTitle").textContent=t[1];
-  document.getElementById("rSub").innerHTML=`${t[3]}<span class="en">${t[2]}</span>`;
-  const missed=[];
-  CATS.forEach((c,ci)=>c.items.forEach((it,ii)=>{ if(!state.has(key(ci,ii))) missed.push({c,it}) }));
-  missed.sort((a,b)=>b.it.w-a.it.w);
-  const colors={"첫 번째 한국":"#4d7c57","연결된 한국":"#2a5d8f","밤의 한국":"#4a4066","사는 사람의 한국":"#b98a2f","계절의 한국":"#c73e3a"};
-  document.getElementById("missedList").innerHTML = missed.slice(0,5).map(m=>
-    `<div class="mc"><span class="tag" style="background:${colors[m.c.n]}">${m.c.n}</span><span class="tx">${m.it.t}<small>${m.it.en}</small></span></div>`).join("")
-    || "<p style='font-size:13px'>모두 채우셨군요 — 이제 계절을 바꿔 다시 오세요. · Now come back in a different season.</p>";
-  document.getElementById("result").style.display="block";
-  document.getElementById("ctaBox").style.display="none";
-  document.getElementById("result").scrollIntoView({behavior:"smooth"});
-  if(window.gtag) gtag('event','complete_test',{score:p});
+
+let lastMissed = [];
+document.getElementById("submitBtn").addEventListener("click", () => {
+  const p = calc();
+  document.getElementById("finalPct").textContent = p;
+  const t = TITLES.filter(x => p >= x[0]).pop();
+  document.getElementById("rTitle").textContent = t[2].split(".")[0] + ".";
+  document.getElementById("rSub").innerHTML = `${t[1]} — ${t[3]}`;
+  const missed = [];
+  CATS.forEach((c, ci) => c.items.forEach((it, ii) => { if (!state.has(key(ci, ii))) missed.push({ c, it }); }));
+  missed.sort((a, b) => b.it.w - a.it.w);
+  lastMissed = missed;
+  // 재방문 유도: 다음 여행 1회(상위 5개)로 얻을 수 있는 %p
+  const gain = Math.round(missed.slice(0, 5).reduce((a, m) => a + m.it.w, 0) / TOTAL * 100);
+  document.getElementById("nextTrip").innerHTML = gain > 0
+    ? `<b>One more trip = +${gain}%p</b><p>Complete the 5 things below and your map hits ${Math.min(100, p + gain)}%.<br>다음 한 번의 여행으로 지도가 ${Math.min(100, p + gain)}%가 됩니다.</p>`
+    : `<b>지도를 완성하셨습니다</b><p>이제 계절을 바꿔 다시 오세요. · Now come back in a different season.</p>`;
+  const colors = { "첫 번째 한국": "#4d7c57", "연결된 한국": "#2a5d8f", "데이터가 찾은 숨은 곳": "#b98a2f", "밤의 한국": "#4a4066", "사는 사람의 한국": "#c08f2e", "계절의 한국": "#c73e3a" };
+  document.getElementById("missedList").innerHTML = missed.slice(0, 5).map(m =>
+    `<div class="mc"><span class="tag" style="background:${colors[m.c.n] || '#666'}">${m.c.n}</span><span class="tx">${m.it.en}<small>${m.it.t}</small></span></div>`).join("")
+    || "<p style='font-size:13px'>모두 채우셨군요.</p>";
+  document.getElementById("result").style.display = "block";
+  document.getElementById("ctaBox").style.display = "none";
+  document.getElementById("result").scrollIntoView({ behavior: "smooth" });
+  if (window.gtag) gtag('event', 'complete_test', { score: p });
 });
-document.getElementById("rvBtns").addEventListener("click",e=>{
-  const b=e.target.closest("button"); if(!b) return;
-  document.querySelectorAll("#rvBtns button").forEach(x=>x.classList.remove("sel"));
+document.getElementById("wishBtn").addEventListener("click", async () => {
+  const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. ${m.it.t}`).join("\n");
+  const txt = `🇰🇷 나의 다음 한국 여행 위시리스트\n${list}\n\n한국 완성도 지도에서 만들어짐 · ${location.href}`;
+  try { await navigator.clipboard.writeText(txt); alert("위시리스트가 복사되었습니다! 메모장에 붙여넣으세요.\nWishlist copied — paste it in your notes."); } catch (e) {}
+  if (window.gtag) gtag('event', 'save_wishlist');
+});
+document.getElementById("rvBtns").addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  document.querySelectorAll("#rvBtns button").forEach(x => x.classList.remove("sel"));
   b.classList.add("sel");
-  document.getElementById("rvThanks").style.display="block";
-  if(window.gtag) gtag('event','revisit_intent',{answer:b.dataset.v});
+  document.getElementById("rvThanks").style.display = "block";
+  if (window.gtag) gtag('event', 'revisit_intent', { answer: b.dataset.v });
 });
-document.getElementById("shareBtn").addEventListener("click",async()=>{
-  const p=document.getElementById("finalPct").textContent;
-  const txt=`내 한국 지도는 ${p}% 채워졌다 🇰🇷 My Korea map is ${p}% complete. How full is yours?\n`;
-  if(navigator.share){try{await navigator.share({text:txt,url:location.href})}catch(e){}}
-  else{await navigator.clipboard.writeText(txt+location.href); alert("복사되었습니다! Copied — paste anywhere to share.")}
-  if(window.gtag) gtag('event','share',{score:p});
+document.getElementById("shareBtn").addEventListener("click", async () => {
+  const p = document.getElementById("finalPct").textContent;
+  const txt = `내 한국 지도는 ${p}% 채워졌다 🇰🇷 My Korea map is ${p}% complete. How full is yours?\n`;
+  if (navigator.share) { try { await navigator.share({ text: txt, url: location.href }); } catch (e) {} }
+  else { await navigator.clipboard.writeText(txt + location.href); alert("복사되었습니다! Copied — paste anywhere to share."); }
+  if (window.gtag) gtag('event', 'share', { score: p });
 });
-document.getElementById("retryBtn").addEventListener("click",()=>location.reload());
+document.getElementById("retryBtn").addEventListener("click", () => location.reload());
 update();
 </script>
 </body>
