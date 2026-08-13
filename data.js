@@ -1,5 +1,5 @@
-/* 자동 생성 — 데이터랩 산출 항목 (엔진 v1.2, 2026-08-13)
-   '사람의 한국'은 외래관광객조사 만족요인 기반 질적 큐레이션 카테고리 */
+/* 자동 생성 — 데이터랩 산출 항목 (엔진 v1.3, 2026-08-13)
+   '사람의 한국'은 외래관광객조사 만족요인 기반 질적 큐레이션 */
 const CATS = [
  {
   "icon": "🏛️",
@@ -277,6 +277,27 @@ const CATS = [
     "w": 3,
     "region": null,
     "hint": ""
+   },
+   {
+    "t": "뜨거운 국물 먹으며 \"시원~하다!\"",
+    "en": "Eat scalding-hot soup and say \"siwonhada!\" (so refreshing!)",
+    "w": 4,
+    "region": null,
+    "hint": "한국인만 이해하는 역설 · The paradox only Koreans understand"
+   },
+   {
+    "t": "가게 나올 때 \"수고하세요~\"",
+    "en": "Leave any shop with \"sugohaseyo~\" — an untranslatable goodbye",
+    "w": 4,
+    "region": null,
+    "hint": "'수고'는 영어에 없는 단어입니다 · There is no English word for this"
+   },
+   {
+    "t": "\"금강산도 식후경\" — 밥부터 먹고 관광하기",
+    "en": "Live the proverb \"geumgangsando sikhugyeong\" — even the best view comes after a meal",
+    "w": 3,
+    "region": null,
+    "hint": "사자성어를 행동으로 · A 4-character proverb, practiced"
    }
   ]
  },
