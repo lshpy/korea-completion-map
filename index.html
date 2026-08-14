@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Seoul Completion Map</title>
-<meta name="description" content="Swipe through Seoul. How much have you actually seen? Built on official Korea Tourism data.">
+<title>The Seoul Local Test</title>
+<meta name="description" content="How local are you? 18 missions across the real Seoul — built on official Korea Tourism data.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400;600;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -121,7 +121,7 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
   <div class="topbar">
     <div class="minimap"><svg id="miniMap"></svg></div>
     <div class="tt">
-      <b>SEOUL COMPLETION MAP</b>
+      <b>THE SEOUL LOCAL TEST</b>
       <div class="pbar"><i id="pbarFill"></i></div>
     </div>
     <div class="pct disp" id="pctLive">2%</div>
@@ -130,14 +130,14 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
   <!-- 커버 -->
   <div class="screen" id="startScr">
     <div class="cover-rule"></div>
-    <div class="cover-kicker mono"><span>THE SEOUL INDEX</span><span>EST. 2026</span></div>
-    <div class="cover-title">How much of Seoul<br>have you <em>actually</em> seen?</div>
-    <div class="cover-sub">Thirty-four experiences, weighted by official Korea Tourism data. Swipe right if you've lived it. 경험한 것을 체크하면 서울 지도가 채워집니다.</div>
+    <div class="cover-kicker mono"><span>MISSION PASSPORT</span><span>EST. 2026</span></div>
+    <div class="cover-title">How <em>local</em><br>are you, really?</div>
+    <div class="cover-sub">Eighteen missions across the Seoul locals actually live in — each one a Korean phrase, a place the data found, a thing to do. Swipe right if you've done it. The rest becomes your quest. 당신의 서울 미션 여권입니다.</div>
     <div class="endow">
       <span class="st disp">+2%</span>
-      <p><b>You've already landed in Korea.</b> That counts. Every journey starts somewhere — 여기까지 온 것도 여행입니다.</p>
+      <p><b>You've already landed in Korea.</b> First mission complete. 여기까지 온 것도 미션입니다.</p>
     </div>
-    <button class="bigbtn" id="startBtn">Begin — 시작</button>
+    <button class="bigbtn" id="startBtn">Take the test — 시작</button>
     <button class="ghostbtn" id="resumeBtn" style="display:none;margin-top:10px"></button>
     <div class="cover-note">SOURCE · KOREA TOURISM DATA LAB (KTO) · MAP · KOSTAT</div>
   </div>
@@ -146,34 +146,34 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
   <div class="screen" id="deckScr">
     <div class="stack" id="stack"></div>
     <div class="swipebtns">
-      <button class="sb no" id="btnNo">NOT YET</button>
-      <button class="sb yes" id="btnYes">BEEN ✓</button>
+      <button class="sb no" id="btnNo">LATER</button>
+      <button class="sb yes" id="btnYes">DONE ✓</button>
     </div>
-    <div class="swipehint">or swipe the card — left: not yet · right: been</div>
+    <div class="swipehint">swipe — left: on my quest list · right: done it</div>
   </div>
 
   <!-- 결과: 비자 -->
   <div class="screen" id="resultScr">
     <div class="visa">
-      <div class="vh mono"><span>REPUBLIC OF SEOUL · VISA OF EXPERIENCE</span><span id="visaDate"></span></div>
+      <div class="vh mono"><span>THE SEOUL LOCAL TEST · CERTIFICATE</span><span id="visaDate"></span></div>
       <svg class="vseal" id="visaSeal"></svg>
       <div class="arch-name disp" id="archName"></div>
       <div class="arch-line" id="archLine"></div>
-      <div class="vnum"><span class="n disp" id="finalPct">0%</span><span class="l mono">OF SEOUL<br>COMPLETED</span></div>
+      <div class="vnum"><span class="n disp" id="finalPct">0%</span><span class="l mono">LOCAL<br>SCORE</span></div>
     </div>
     <div class="mapcard">
-      <h3 class="mono">MY SEOUL MAP · 나의 서울 지도</h3>
+      <h3 class="mono">MISSION MAP · 미션 지도</h3>
       <svg class="bigmap" id="bigMap"></svg>
-      <div class="maplegend">Empty districts — the Seoul still waiting for you</div>
+      <div class="maplegend">Empty districts — missions not yet unlocked there</div>
     </div>
     <div class="nexttrip" id="nextTrip"></div>
     <button class="wishbtn mono" id="calBtn" style="margin-top:0">📅 Put my next Seoul window on my calendar</button>
     <div style="text-align:center;font-size:11px;color:var(--faint);font-style:italic">Next season, 3 new cards unlock. Your map will be waiting. · 다음 계절, 새 카드가 열립니다.</div>
     <div class="missed">
-      <h3 class="disp">Seoul saved these for you</h3>
-      <p>A city this good never shows you everything at once. 서울이 아껴둔 것들.</p>
+      <h3 class="disp">Your open missions</h3>
+      <p>The quest continues on your next trip. 다음 여행의 미션들.</p>
       <div id="missedList"></div>
-      <button class="wishbtn mono" id="wishBtn">Save my next-trip wishlist</button>
+      <button class="wishbtn mono" id="wishBtn">Save my quest list</button>
     </div>
     <div class="revisit">
       <h3 class="disp">Will you come back for the rest?</h3>
@@ -196,8 +196,8 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
   </div>
 </div>
 
-<script src="seoul_map.js?v=5"></script>
-<script src="data.js?v=5"></script>
+<script src="seoul_map.js?v=6"></script>
+<script src="missions.js?v=6"></script>
 <script>
 /* ── 카테고리 인장(원형 스탬프) ── */
 const CAT_SEAL = {
@@ -223,8 +223,8 @@ function sealSVG(cat, id) {
 }
 const GU_COLORS = {"종로구":"#a63a32","중구":"#8a6d3b","용산구":"#6b4a3a","마포구":"#9a4a63","강남구":"#3d4b60","성동구":"#4a6b4f","송파구":"#54636f","영등포구":"#9a5a6b","서초구":"#5d5470","은평구":"#5f7050","강북구":"#71764f","광진구":"#3f6b6b","성북구":"#7d4a5a"};
 const BASE = 2;
-const TOTALW = CARDS.reduce((a, c) => a + c.w, 0);
-const answers = new Array(CARDS.length).fill(null);
+const TOTALW = MISSIONS.reduce((a, c) => a + c.pts, 0);
+const answers = new Array(MISSIONS.length).fill(null);
 let cursor = 0;
 
 function renderMap(svgEl, cls) {
@@ -242,15 +242,15 @@ const bigPaths = renderMap(document.getElementById("bigMap"), "gu-big");
 
 function score() {
   let got = 0;
-  answers.forEach((a, i) => { if (a) got += CARDS[i].w; });
+  answers.forEach((a, i) => { if (a) got += MISSIONS[i].pts; });
   return Math.min(100, BASE + Math.round(got / TOTALW * (100 - BASE)));
 }
 function paintMaps() {
   const hit = {}, tot = {};
-  CARDS.forEach((c, i) => {
-    if (!c.gu) return;
-    tot[c.gu] = (tot[c.gu] || 0) + 1;
-    if (answers[i]) hit[c.gu] = (hit[c.gu] || 0) + 1;
+  MISSIONS.forEach((c, i) => {
+    if (!c.place.gu) return;
+    tot[c.place.gu] = (tot[c.place.gu] || 0) + 1;
+    if (answers[i]) hit[c.place.gu] = (hit[c.place.gu] || 0) + 1;
   });
   Object.keys(miniPaths).forEach(gu => {
     const on = (hit[gu] || 0) > 0;
@@ -261,39 +261,41 @@ function paintMaps() {
 }
 function updateHud() {
   document.getElementById("pctLive").textContent = score() + "%";
-  document.getElementById("pbarFill").style.width = (cursor / CARDS.length * 100) + "%";
+  document.getElementById("pbarFill").style.width = (cursor / MISSIONS.length * 100) + "%";
   paintMaps();
 }
 
 /* ── 카드 렌더 ── */
 const stack = document.getElementById("stack");
+const SPECIAL = {revisit:"⭐ REVISIT MISSION — TAKES TWO TRIPS", "season-spring":"⌛ SPRING ONLY", "season-winter":"⌛ WINTER ONLY", weather:"🌧 RAIN-DAY MISSION", night:"🌙 NIGHT MISSION", kwave:"K-WAVE"};
 function makeCard(idx, pos) {
-  const c = CARDS[idx];
+  const m = MISSIONS[idx];
   const el = document.createElement("div");
   el.className = "card" + (pos === 1 ? " behind1" : pos === 2 ? " behind2" : "");
   el.dataset.idx = idx;
+  const catSeal = m.cat === "talk" ? "human" : m.cat === "live" ? "daily" : "hidden";
   el.innerHTML = `
-    <div class="tick mono"><span>SEOUL COMPLETION MAP</span><span>NO. ${String(idx + 1).padStart(2, "0")} / ${CARDS.length}</span></div>
+    <div class="tick mono"><span>MISSION NO. ${String(idx + 1).padStart(2, "0")} / ${MISSIONS.length}</span><span>+${m.pts} PTS</span></div>
     <div class="chead">
-      <div class="hood mono">${c.hood} · SEOUL</div>
-      <div class="nm disp">${c.en}</div>
-      <div class="ko">${c.ko}</div>
+      <div class="hood mono">${m.place.hood} · ${m.place.en}</div>
+      <div class="nm disp">“${m.phrase.ko}”</div>
+      <div class="ko">${m.phrase.rom} — ${m.phrase.en}</div>
     </div>
     <div class="rule"></div>
-    <div class="hk">${c.hook}</div>
+    <div class="hk">${m.how}</div>
     <div class="cfoot">
-      ${c.season ? `<span class="season-note mono">⌛ ${c.season.toUpperCase()} ONLY — MISS IT, WAIT A YEAR</span>` : "<span></span>"}
-      ${sealSVG(c.cat, idx)}
+      ${m.special && SPECIAL[m.special] ? `<span class="season-note mono">${SPECIAL[m.special]}</span>` : `<span class="season-note mono" style="border-color:var(--faint);color:var(--faint)">📊 ${m.basis.slice(0,42)}</span>`}
+      ${sealSVG(catSeal, idx)}
     </div>
-    <span class="stamp yes mono">BEEN ✓</span>
-    <span class="stamp no mono">NOT YET</span>`;
+    <span class="stamp yes mono">DONE ✓</span>
+    <span class="stamp no mono">LATER</span>`;
   return el;
 }
 function renderStack() {
   stack.innerHTML = "";
   for (let p = 2; p >= 0; p--) {
     const idx = cursor + p;
-    if (idx < CARDS.length) stack.appendChild(makeCard(idx, p));
+    if (idx < MISSIONS.length) stack.appendChild(makeCard(idx, p));
   }
   attachDrag();
 }
@@ -327,7 +329,7 @@ function fling(el, yes) {
   el.style.opacity = 0;
   cursor++;
   save(); updateHud();
-  setTimeout(() => { cursor >= CARDS.length ? showResult() : renderStack(); }, 230);
+  setTimeout(() => { cursor >= MISSIONS.length ? showResult() : renderStack(); }, 230);
 }
 function answer(yes) { const el = topCard(); if (el) fling(el, yes); }
 document.getElementById("btnYes").addEventListener("click", () => answer(true));
@@ -338,8 +340,8 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") answer(false);
 });
 
-function save() { localStorage.setItem("scm_v4", JSON.stringify({ answers, cursor })); }
-function load() { try { return JSON.parse(localStorage.getItem("scm_v4") || "null"); } catch (e) { return null; } }
+function save() { localStorage.setItem("slt_v1", JSON.stringify({ answers, cursor })); }
+function load() { try { return JSON.parse(localStorage.getItem("slt_v1") || "null"); } catch (e) { return null; } }
 
 const scr = { start: document.getElementById("startScr"), deck: document.getElementById("deckScr"), result: document.getElementById("resultScr") };
 function show(name) { Object.entries(scr).forEach(([k, el]) => el.style.display = (k === name ? "flex" : "none")); }
@@ -350,20 +352,12 @@ document.getElementById("startBtn").addEventListener("click", () => {
 });
 
 function archetype(p) {
-  if (p < 15) return ["Seoul Rookie", "Your Seoul story hasn't even started. Lucky you — it's all ahead."];
-  if (p >= 85) return ["Honorary Seoulite", "Impossible in one trip. You've been coming back, haven't you?"];
-  if (p >= 65) return ["Almost Seoulite", "Your favorite café probably misses you."];
-  const catScore = {};
-  CARDS.forEach((c, i) => { if (answers[i]) catScore[c.cat] = (catScore[c.cat] || 0) + c.w; });
-  const dom = Object.entries(catScore).sort((a, b) => b[1] - a[1])[0]?.[0];
-  if (dom === "night") return ["Seoul Night Owl", "You know the city that wakes up after dark."];
-  if (dom === "hidden") return ["Hidden Gem Hunter", "You find the Seoul that guidebooks miss."];
-  if (dom === "human") return ["The People's Traveler", "You collect conversations, not just photos."];
-  if (dom === "kwave") return ["K-Wave Pilgrim", "You came for the culture — and you found it."];
-  if (p >= 40) return ["Seoul Explorer", "Solidly beyond the guidebook. Seoul still has secrets though."];
-  return ["Guidebook Traveler", "You've seen the postcard Seoul. The real one is waiting."];
+  if (p < 20) return ["Certified Tourist", "Everyone starts here. Your quest list is glorious."];
+  if (p < 45) return ["Seoul Explorer", "Past the guidebook. The city is starting to talk back."];
+  if (p < 70) return ["Regular in Training", "Shop owners are starting to recognize you."];
+  if (p < 90) return ["Practically Local", "You say 'siwonhada' without thinking now."];
+  return ["Honorary Seoulite", "This takes multiple trips. You didn't visit Seoul — you lived it."];
 }
-
 let lastMissed = [];
 function showResult() {
   const p = score();
@@ -373,15 +367,15 @@ function showResult() {
   document.getElementById("finalPct").textContent = p + "%";
   document.getElementById("visaDate").textContent = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
   document.getElementById("visaSeal").outerHTML = sealSVG("season", "visa").replace('class="seal"', 'class="vseal" id="visaSeal"').replace("SEASONAL ONLY", "VISA OF EXPERIENCE").replace(">限<", ">承<");
-  const missed = CARDS.map((c, i) => ({ c, i })).filter(x => answers[x.i] === false);
-  missed.sort((a, b) => b.c.w - a.c.w);
+  const missed = MISSIONS.map((c, i) => ({ c, i })).filter(x => answers[x.i] === false);
+  missed.sort((a, b) => b.c.pts - a.c.pts);
   lastMissed = missed;
-  const gain = Math.round(missed.slice(0, 5).reduce((a, m) => a + m.c.w, 0) / TOTALW * (100 - BASE));
+  const gain = Math.round(missed.slice(0, 5).reduce((a, m) => a + m.c.pts, 0) / TOTALW * (100 - BASE));
   document.getElementById("nextTrip").innerHTML = gain > 0
-    ? `<b class="disp">One more trip = +${gain} points</b><p>Just five experiences would take you to ${Math.min(100, p + gain)}%. Seoul is patient.</p>`
+    ? `<b class="disp">One more trip = +${gain} points</b><p>Five missions would take you to ${Math.min(100, p + gain)}. The ⭐ regular mission alone needs two visits.</p>`
     : `<b class="disp">You've seen it all — this season</b><p>Come back in a different season. Seoul changes.</p>`;
   document.getElementById("missedList").innerHTML = missed.slice(0, 3).map((m, i) =>
-    `<div class="mc"><span class="no disp">${String(i + 1).padStart(2, "0")}</span><span class="tx">${m.c.en}<small>${m.c.hook}</small></span></div>`).join("")
+    `<div class="mc"><span class="no disp">${String(i + 1).padStart(2, "0")}</span><span class="tx">“${m.c.phrase.ko}” — ${m.c.place.en}<small>${m.c.how}</small></span></div>`).join("")
     || "<p style='font-size:12.5px;font-style:italic'>Nothing missed. Respect.</p>";
   show("result");
   paintMaps(); save();
@@ -396,8 +390,8 @@ document.getElementById("rvBtns").addEventListener("click", e => {
   if (window.gtag) gtag('event', 'revisit_intent', { answer: b.dataset.v });
 });
 document.getElementById("wishBtn").addEventListener("click", async () => {
-  const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. ${m.c.en} — ${m.c.hood}`).join("\n");
-  const txt = `My next Seoul trip wishlist\n${list}\n\nSeoul Completion Map · ${location.href}`;
+  const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. "${m.c.phrase.ko}" @ ${m.c.place.en}`).join("\n");
+  const txt = `My Seoul quest list\n${list}\n\nThe Seoul Local Test · ${location.href}`;
   try { await navigator.clipboard.writeText(txt); alert("Wishlist copied — paste it anywhere!"); } catch (e) {}
   if (window.gtag) gtag('event', 'save_wishlist');
 });
@@ -405,7 +399,7 @@ document.getElementById("calBtn").addEventListener("click", () => {
   // 다음 시즌 창: 봄 벚꽃(4/1~14) 또는 가까운 다음 계절 시작
   const now = new Date();
   const y = now.getMonth() >= 3 ? now.getFullYear() + 1 : now.getFullYear();
-  const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. ${m.c.en}`).join("\\n");
+  const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. \"${m.c.phrase.ko}\" @ ${m.c.place.en}`).join("\\n");
   const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//SeoulCompletionMap//EN","BEGIN:VEVENT",
     `UID:scm-${Date.now()}@seoulmap`,
     `DTSTART;VALUE=DATE:${y}0401`,`DTEND;VALUE=DATE:${y}0415`,
@@ -417,7 +411,7 @@ document.getElementById("calBtn").addEventListener("click", () => {
   a.download = "seoul-next-trip.ics"; a.click();
   if (window.gtag) gtag('event', 'save_calendar');
 });
-document.getElementById("retryBtn").addEventListener("click", () => { localStorage.removeItem("scm_v4"); location.reload(); });
+document.getElementById("retryBtn").addEventListener("click", () => { localStorage.removeItem("slt_v1"); location.reload(); });
 
 document.getElementById("shareBtn").addEventListener("click", async () => {
   const p = score();
@@ -429,7 +423,7 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
   x.strokeStyle = "#211d17"; x.lineWidth = 4; x.strokeRect(40, 40, W - 80, H - 80);
   x.fillStyle = "#211d17"; x.textAlign = "center";
   x.font = "600 34px 'IBM Plex Mono', monospace";
-  x.fillText("SEOUL COMPLETION MAP", W / 2, 140);
+  x.fillText("THE SEOUL LOCAL TEST", W / 2, 140);
   x.font = "italic 92px 'Instrument Serif', Georgia, serif";
   x.fillText(nm, W / 2, 330);
   x.font = "230px 'Instrument Serif', Georgia, serif";
@@ -437,7 +431,7 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
   x.fillText(p + "%", W / 2, 610);
   x.font = "600 30px 'IBM Plex Mono', monospace";
   x.fillStyle = "#7a7263";
-  x.fillText("OF SEOUL COMPLETED", W / 2, 670);
+  x.fillText("LOCAL SCORE", W / 2, 670);
   try {
     const svgEl = document.getElementById("bigMap");
     const ser = new XMLSerializer().serializeToString(svgEl);
@@ -452,11 +446,11 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
   } catch (e) {}
   x.font = "italic 34px 'Instrument Serif', Georgia, serif";
   x.fillStyle = "#211d17";
-  x.fillText("How full is your map?", W / 2, 1240);
+  x.fillText("How local are you?", W / 2, 1240);
   cv.toBlob(async blob => {
     const file = new File([blob], "seoul-map.png", { type: "image/png" });
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      try { await navigator.share({ files: [file], text: `My Seoul map is ${p}% complete`, url: location.href }); return; } catch (e) {}
+      try { await navigator.share({ files: [file], text: `My Seoul Local Score: ${p} — how local are you?`, url: location.href }); return; } catch (e) {}
     }
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob); a.download = "seoul-completion-map.png"; a.click();
@@ -465,10 +459,10 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
 });
 
 const saved = load();
-if (saved && saved.cursor > 0 && saved.cursor < CARDS.length) {
+if (saved && saved.cursor > 0 && saved.cursor < MISSIONS.length) {
   const rb = document.getElementById("resumeBtn");
   rb.style.display = "block";
-  rb.textContent = `Continue where I left off — ${saved.cursor}/${CARDS.length}`;
+  rb.textContent = `Continue the test — ${saved.cursor}/${MISSIONS.length}`;
   rb.addEventListener("click", () => {
     saved.answers.forEach((a, i) => answers[i] = a);
     cursor = saved.cursor;
