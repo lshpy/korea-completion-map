@@ -5,100 +5,115 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Seoul Completion Map</title>
 <meta name="description" content="Swipe through Seoul. How much have you actually seen? Built on official Korea Tourism data.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400;600;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
 <!-- GA4: 배포 시 측정 ID 교체 후 주석 해제
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXX');</script> -->
 <style>
 :root{
-  --ink:#191922; --sub:#71717c; --bg:#f4f2ee; --card:#ffffff; --line:#e6e3dd;
-  --red:#c73e3a; --green:#3e8a55; --gold:#c08f2e;
+  --paper:#f3efe5; --paper2:#faf7ef; --ink:#211d17; --faint:#7a7263;
+  --stamp:#b0352b; --seal:#8f7440; --line:#d9d2c0; --indigo:#3d4b60;
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%}
-body{font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Pretendard","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden}
+body{font-family:"Noto Serif KR",Georgia,serif;background:var(--paper);color:var(--ink);line-height:1.55;overflow-x:hidden}
+.mono{font-family:"IBM Plex Mono",monospace}
+.disp{font-family:"Instrument Serif","Noto Serif KR",serif}
 .app{max-width:430px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;position:relative}
 
 /* ── 상단바 ── */
-.topbar{position:sticky;top:0;z-index:20;background:rgba(244,242,238,.94);backdrop-filter:blur(10px);display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1px solid var(--line)}
+.topbar{position:sticky;top:0;z-index:20;background:rgba(243,239,229,.96);display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1.5px solid var(--ink)}
 .topbar .tt{flex:1}
-.topbar .tt b{font-size:14.5px;font-weight:800;display:block}
-.topbar .tt .pbar{height:5px;background:#e5e2db;border-radius:99px;margin-top:6px;overflow:hidden}
-.topbar .tt .pbar i{display:block;height:100%;width:0%;background:linear-gradient(90deg,#2a5d8f,var(--red));border-radius:99px;transition:width .4s}
-.minimap{width:64px;height:52px;flex:none}
+.topbar .tt b{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.14em;display:block}
+.topbar .tt .pbar{height:3px;background:var(--line);margin-top:7px;overflow:hidden}
+.topbar .tt .pbar i{display:block;height:100%;width:0%;background:var(--stamp);transition:width .4s}
+.minimap{width:60px;height:48px;flex:none}
 .minimap svg{width:100%;height:100%}
-.pct{font-size:15px;font-weight:900;min-width:44px;text-align:right}
-.gu-mini{fill:#e7e4dc;stroke:#f4f2ee;stroke-width:1.2;transition:fill .4s}
+.pct{font-family:"Instrument Serif",serif;font-size:22px;min-width:52px;text-align:right}
+.gu-mini{fill:#e6e0d0;stroke:var(--paper);stroke-width:1.2;transition:fill .4s}
 
-/* ── 스타트 ── */
+/* ── 화면 공통 ── */
 .screen{flex:1;display:flex;flex-direction:column;padding:0 18px 24px}
-#startScr{justify-content:center;text-align:center;gap:14px}
-#startScr .big{font-size:clamp(30px,8.5vw,40px);font-weight:900;letter-spacing:-.03em;line-height:1.15}
-#startScr .endow{background:var(--card);border:1.5px solid var(--line);border-radius:16px;padding:14px 16px;font-size:14px}
-#startScr .endow b{color:var(--red)}
-#startScr .sub{color:var(--sub);font-size:13.5px}
-.bigbtn{border:0;border-radius:16px;padding:17px;font-size:17px;font-weight:800;background:var(--ink);color:#fff;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-.bigbtn:active{transform:scale(.98)}
-.resume{border:1.5px solid var(--line);background:#fff;border-radius:14px;padding:13px;font-size:14px;font-weight:700;cursor:pointer;color:var(--sub)}
+.bigbtn{border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);padding:16px;font-size:15px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:.1em;cursor:pointer;text-transform:uppercase}
+.bigbtn:active{transform:scale(.985)}
+.ghostbtn{border:1.5px solid var(--line);background:transparent;color:var(--faint);padding:13px;font-size:12.5px;font-family:"IBM Plex Mono",monospace;letter-spacing:.06em;cursor:pointer}
 
-/* ── 카드 덱 ── */
-#deckScr{display:none;padding-top:14px}
-.stack{position:relative;flex:1;min-height:390px;max-height:480px}
-.card{position:absolute;inset:0;background:var(--card);border-radius:24px;box-shadow:0 10px 30px rgba(25,25,34,.12);border:1px solid var(--line);display:flex;flex-direction:column;overflow:hidden;touch-action:none;user-select:none}
-.card .head{height:42%;display:flex;align-items:center;justify-content:center;font-size:72px;position:relative}
-.card .head .season-badge{position:absolute;top:12px;right:12px;font-size:10.5px;font-weight:800;background:rgba(255,255,255,.85);border-radius:99px;padding:4px 10px;color:#a3542e}
-.card .head .data-badge{position:absolute;top:12px;left:12px;font-size:10px;font-weight:700;background:rgba(255,255,255,.85);border-radius:99px;padding:4px 9px;color:#3a6ea5}
-.card .body{flex:1;padding:16px 18px 14px;display:flex;flex-direction:column;gap:6px}
-.card .hood{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sub)}
-.card .nm{font-size:21px;font-weight:900;letter-spacing:-.02em;line-height:1.2}
-.card .nm small{display:block;font-size:12.5px;color:var(--sub);font-weight:600;margin-top:2px}
-.card .hk{font-size:13.5px;color:#3c3c44;margin-top:auto;line-height:1.45}
-.stamp{position:absolute;top:22px;font-size:20px;font-weight:900;letter-spacing:.04em;padding:7px 14px;border:3.5px solid;border-radius:12px;opacity:0;transform:rotate(-14deg);background:rgba(255,255,255,.88)}
-.stamp.yes{left:16px;color:var(--green);border-color:var(--green)}
-.stamp.no{right:16px;color:#8a8a94;border-color:#8a8a94;transform:rotate(14deg)}
-.behind1{transform:scale(.955) translateY(12px);filter:brightness(.985)}
-.behind2{transform:scale(.91) translateY(24px);filter:brightness(.97)}
-.swipebtns{display:flex;gap:14px;justify-content:center;padding:16px 0 4px}
-.sb{width:64px;height:64px;border-radius:50%;border:0;font-size:24px;font-weight:900;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.13)}
-.sb.no{background:#fff;color:#8a8a94;border:2px solid var(--line)}
-.sb.yes{background:var(--green);color:#fff}
-.sb:active{transform:scale(.92)}
-.swipehint{text-align:center;font-size:11.5px;color:var(--sub);padding-top:8px}
+/* ── 스타트: 매거진 커버 ── */
+#startScr{justify-content:center;gap:0;text-align:left}
+.cover-rule{border-top:2.5px solid var(--ink);margin:10px 0 0}
+.cover-kicker{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.22em;padding:10px 0 4px;display:flex;justify-content:space-between}
+.cover-title{font-family:"Instrument Serif",serif;font-size:clamp(46px,13vw,60px);line-height:.98;letter-spacing:-.01em;padding:12px 0 4px}
+.cover-title em{font-style:italic}
+.cover-sub{font-size:14px;color:var(--faint);padding:8px 0 18px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.endow{display:flex;gap:12px;align-items:baseline;padding:0 0 18px}
+.endow .st{font-family:"Instrument Serif",serif;font-size:34px;color:var(--stamp);flex:none}
+.endow p{font-size:13px;color:var(--faint)}
+.endow p b{color:var(--ink);font-weight:600}
+.cover-note{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:var(--faint);padding-top:14px;text-align:center}
 
-/* ── 결과 ── */
-#resultScr{display:none;gap:14px;padding-top:16px;padding-bottom:40px}
-.rcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:24px 20px;text-align:center}
-.arch-emoji{font-size:52px;line-height:1}
-.arch-name{font-size:24px;font-weight:900;letter-spacing:-.02em;margin-top:6px}
-.arch-line{font-size:13.5px;color:var(--sub);margin-top:4px}
-.rpct{font-size:56px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-top:12px}
-.rpct small{font-size:20px;color:var(--sub)}
-.rpct-sub{font-size:12px;color:var(--sub)}
-.mapcard{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:16px 12px 8px}
-.mapcard h3{font-size:12.5px;font-weight:800;color:var(--sub);letter-spacing:.06em;text-transform:uppercase;text-align:center;margin-bottom:4px}
+/* ── 카드 덱: 옛 티켓/여권 낱장 ── */
+#deckScr{display:none;padding-top:16px}
+.stack{position:relative;flex:1;min-height:400px;max-height:490px}
+.card{position:absolute;inset:0;background:var(--paper2);border:1.5px solid var(--ink);display:flex;flex-direction:column;overflow:hidden;touch-action:none;user-select:none;box-shadow:5px 5px 0 rgba(33,29,23,.12)}
+.card .tick{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;padding:10px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:var(--faint)}
+.card .chead{padding:22px 18px 6px}
+.card .hood{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;color:var(--stamp);text-transform:uppercase}
+.card .nm{font-family:"Instrument Serif",serif;font-size:clamp(26px,7.4vw,32px);line-height:1.05;letter-spacing:-.01em;padding-top:8px}
+.card .ko{font-size:13px;color:var(--faint);padding-top:6px;font-weight:600}
+.card .rule{border-top:1px solid var(--line);margin:14px 18px 0}
+.card .hk{font-size:14px;line-height:1.6;padding:14px 18px;font-style:italic;color:#453e33}
+.card .cfoot{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;padding:0 14px 12px}
+.card .season-note{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;color:var(--stamp);border:1px solid var(--stamp);padding:4px 8px;transform:rotate(-2deg)}
+.seal{width:74px;height:74px;flex:none;opacity:.85;transform:rotate(8deg)}
+.stamp{position:absolute;top:50px;font-family:"IBM Plex Mono",monospace;font-size:17px;font-weight:600;letter-spacing:.1em;padding:8px 14px;border:3px double;opacity:0;transform:rotate(-12deg);background:rgba(250,247,239,.9)}
+.stamp.yes{left:14px;color:var(--stamp);border-color:var(--stamp)}
+.stamp.no{right:14px;color:#8a8272;border-color:#8a8272;transform:rotate(12deg)}
+.behind1{transform:scale(.96) translateY(11px)}
+.behind2{transform:scale(.92) translateY(22px)}
+.swipebtns{display:flex;gap:12px;justify-content:center;padding:18px 0 2px}
+.sb{width:78px;height:44px;border:1.5px solid var(--ink);background:var(--paper2);font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;letter-spacing:.1em;cursor:pointer}
+.sb.yes{background:var(--stamp);border-color:var(--stamp);color:var(--paper2)}
+.sb:active{transform:scale(.94)}
+.swipehint{text-align:center;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;color:var(--faint);padding-top:9px;text-transform:uppercase}
+
+/* ── 결과: 비자 페이지 ── */
+#resultScr{display:none;gap:14px;padding-top:16px;padding-bottom:44px}
+.visa{background:var(--paper2);border:1.5px solid var(--ink);padding:22px 20px;position:relative}
+.visa .vh{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;color:var(--faint);display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px}
+.arch-name{font-family:"Instrument Serif",serif;font-size:clamp(30px,8.6vw,38px);line-height:1.05;padding:16px 0 4px}
+.arch-line{font-size:13.5px;color:var(--faint);font-style:italic}
+.vnum{display:flex;align-items:baseline;gap:10px;padding-top:16px}
+.vnum .n{font-family:"Instrument Serif",serif;font-size:64px;line-height:1;color:var(--stamp)}
+.vnum .l{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.14em;color:var(--faint)}
+.visa .vseal{position:absolute;right:14px;top:52px;width:84px;height:84px;opacity:.8;transform:rotate(-10deg)}
+.mapcard{background:var(--paper2);border:1.5px solid var(--ink);padding:14px 12px 6px}
+.mapcard h3{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;letter-spacing:.2em;text-align:center;color:var(--faint);margin-bottom:4px}
 .bigmap{width:100%;height:auto}
-.gu-big{fill:#e9e6df;stroke:#fff;stroke-width:1.6;transition:fill .5s}
-.maplegend{text-align:center;font-size:11px;color:var(--sub);padding:6px 0}
-.nexttrip{background:linear-gradient(135deg,#fdf3ee,#f6ebf0);border:1.5px solid #ecd9cf;border-radius:16px;padding:14px;text-align:center}
-.nexttrip b{font-size:15px;color:var(--red)}
-.nexttrip p{font-size:12px;color:#8a6a5e;margin-top:3px}
-.missed h3{font-size:15px;font-weight:800;margin:6px 0 2px}
-.missed>p{font-size:12px;color:var(--sub);margin-bottom:8px}
-.mc{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:8px 0;border-left:4px solid var(--gold)}
-.mc .em{font-size:26px;flex:none}
-.mc .tx{font-size:13.5px;font-weight:700}
-.mc .tx small{display:block;color:var(--sub);font-weight:500;font-size:11.5px}
-.wishbtn{width:100%;border:1.5px dashed var(--gold);background:#fdf9f2;color:#8a6a2e;border-radius:14px;padding:13px;font-size:14px;font-weight:800;cursor:pointer}
-.revisit{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;text-align:center}
-.revisit h3{font-size:14.5px;margin-bottom:3px}
-.revisit p{font-size:11.5px;color:var(--sub);margin-bottom:10px}
+.gu-big{fill:#e8e2d2;stroke:var(--paper2);stroke-width:1.6;transition:fill .5s}
+.maplegend{text-align:center;font-size:11px;color:var(--faint);padding:6px 0;font-style:italic}
+.nexttrip{border:1.5px solid var(--stamp);padding:14px 16px;text-align:center;background:rgba(176,53,43,.04)}
+.nexttrip b{font-family:"Instrument Serif",serif;font-size:19px;color:var(--stamp);font-weight:400}
+.nexttrip p{font-size:12px;color:var(--faint);margin-top:3px}
+.missed h3{font-family:"Instrument Serif",serif;font-size:21px;margin:8px 0 2px}
+.missed>p{font-size:12px;color:var(--faint);margin-bottom:8px;font-style:italic}
+.mc{display:flex;gap:12px;align-items:baseline;border-bottom:1px solid var(--line);padding:12px 2px;background:transparent}
+.mc .no{font-family:"Instrument Serif",serif;font-size:20px;color:var(--stamp);flex:none;width:26px}
+.mc .tx{font-size:14px;font-weight:600}
+.mc .tx small{display:block;color:var(--faint);font-weight:400;font-size:12px;font-style:italic;margin-top:2px}
+.wishbtn{width:100%;border:1.5px dashed var(--seal);background:transparent;color:var(--seal);padding:13px;font-size:11.5px;font-family:"IBM Plex Mono",monospace;letter-spacing:.1em;cursor:pointer;text-transform:uppercase;margin-top:10px}
+.revisit{border:1.5px solid var(--ink);background:var(--paper2);padding:18px;text-align:center}
+.revisit h3{font-family:"Instrument Serif",serif;font-size:19px;margin-bottom:2px}
+.revisit p{font-size:11.5px;color:var(--faint);margin-bottom:12px;font-style:italic}
 .rv{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
-.rv button{border:1.5px solid var(--line);background:#fff;border-radius:99px;padding:10px 15px;font-size:13px;cursor:pointer;font-weight:700}
-.rv button.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
-.thanks{display:none;color:var(--green);font-weight:700;font-size:12.5px;margin-top:9px}
+.rv button{border:1.5px solid var(--line);background:transparent;padding:10px 14px;font-size:12px;cursor:pointer;font-family:"IBM Plex Mono",monospace;letter-spacing:.02em}
+.rv button.sel{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.thanks{display:none;color:var(--seal);font-size:12.5px;margin-top:10px;font-style:italic}
 .sharebar{display:flex;gap:9px}
-.sharebar button{flex:1;border:1.5px solid var(--ink);background:#fff;border-radius:14px;padding:14px;font-size:14.5px;font-weight:800;cursor:pointer}
-.sharebar .pri{background:var(--red);border-color:var(--red);color:#fff}
-footer{text-align:center;font-size:10.5px;color:var(--sub);line-height:1.6;padding-top:6px}
+.sharebar button{flex:1;padding:14px;font-size:12px;font-family:"IBM Plex Mono",monospace;letter-spacing:.08em;font-weight:600;cursor:pointer;text-transform:uppercase;border:1.5px solid var(--ink);background:transparent}
+.sharebar .pri{background:var(--stamp);border-color:var(--stamp);color:var(--paper2)}
+footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;padding-top:8px;font-family:"IBM Plex Mono",monospace;letter-spacing:.02em}
 </style>
 </head>
 <body>
@@ -106,93 +121,112 @@ footer{text-align:center;font-size:10.5px;color:var(--sub);line-height:1.6;paddi
   <div class="topbar">
     <div class="minimap"><svg id="miniMap"></svg></div>
     <div class="tt">
-      <b>Seoul Completion Map</b>
+      <b>SEOUL COMPLETION MAP</b>
       <div class="pbar"><i id="pbarFill"></i></div>
     </div>
-    <div class="pct" id="pctLive">2%</div>
+    <div class="pct disp" id="pctLive">2%</div>
   </div>
 
-  <!-- 시작 -->
+  <!-- 커버 -->
   <div class="screen" id="startScr">
-    <div class="big">How much of Seoul<br>have you <em>actually</em> seen?</div>
-    <div class="endow">🛬 You've landed in Korea — <b>that's already 2%.</b><br><span style="color:var(--sub);font-size:12px">Every journey starts somewhere. 여기까지 온 것도 여행입니다.</span></div>
-    <div class="sub">Swipe through 34 Seoul experiences.<br>Right = been there · Left = not yet<br><span style="font-size:11.5px">Built on official Korea Tourism Data Lab data 📊</span></div>
-    <button class="bigbtn" id="startBtn">Start swiping →</button>
-    <button class="resume" id="resumeBtn" style="display:none"></button>
+    <div class="cover-rule"></div>
+    <div class="cover-kicker mono"><span>THE SEOUL INDEX</span><span>EST. 2026</span></div>
+    <div class="cover-title">How much of Seoul<br>have you <em>actually</em> seen?</div>
+    <div class="cover-sub">Thirty-four experiences, weighted by official Korea Tourism data. Swipe right if you've lived it. 경험한 것을 체크하면 서울 지도가 채워집니다.</div>
+    <div class="endow">
+      <span class="st disp">+2%</span>
+      <p><b>You've already landed in Korea.</b> That counts. Every journey starts somewhere — 여기까지 온 것도 여행입니다.</p>
+    </div>
+    <button class="bigbtn" id="startBtn">Begin — 시작</button>
+    <button class="ghostbtn" id="resumeBtn" style="display:none;margin-top:10px"></button>
+    <div class="cover-note">SOURCE · KOREA TOURISM DATA LAB (KTO) · MAP · KOSTAT</div>
   </div>
 
   <!-- 카드 덱 -->
   <div class="screen" id="deckScr">
     <div class="stack" id="stack"></div>
     <div class="swipebtns">
-      <button class="sb no" id="btnNo">✕</button>
-      <button class="sb yes" id="btnYes">✓</button>
+      <button class="sb no" id="btnNo">NOT YET</button>
+      <button class="sb yes" id="btnYes">BEEN ✓</button>
     </div>
-    <div class="swipehint">✕ Not yet · ✓ Been there — or just swipe the card</div>
+    <div class="swipehint">or swipe the card — left: not yet · right: been</div>
   </div>
 
-  <!-- 결과 -->
+  <!-- 결과: 비자 -->
   <div class="screen" id="resultScr">
-    <div class="rcard">
-      <div class="arch-emoji" id="archEmoji"></div>
-      <div class="arch-name" id="archName"></div>
+    <div class="visa">
+      <div class="vh mono"><span>REPUBLIC OF SEOUL · VISA OF EXPERIENCE</span><span id="visaDate"></span></div>
+      <svg class="vseal" id="visaSeal"></svg>
+      <div class="arch-name disp" id="archName"></div>
       <div class="arch-line" id="archLine"></div>
-      <div class="rpct"><span id="finalPct">0</span><small>%</small></div>
-      <div class="rpct-sub">of Seoul completed · 서울 완성도</div>
+      <div class="vnum"><span class="n disp" id="finalPct">0%</span><span class="l mono">OF SEOUL<br>COMPLETED</span></div>
     </div>
     <div class="mapcard">
-      <h3>My Seoul Map</h3>
+      <h3 class="mono">MY SEOUL MAP · 나의 서울 지도</h3>
       <svg class="bigmap" id="bigMap"></svg>
-      <div class="maplegend">Empty districts = the Seoul still waiting for you</div>
+      <div class="maplegend">Empty districts — the Seoul still waiting for you</div>
     </div>
     <div class="nexttrip" id="nextTrip"></div>
+    <button class="wishbtn mono" id="calBtn" style="margin-top:0">📅 Put my next Seoul window on my calendar</button>
+    <div style="text-align:center;font-size:11px;color:var(--faint);font-style:italic">Next season, 3 new cards unlock. Your map will be waiting. · 다음 계절, 새 카드가 열립니다.</div>
     <div class="missed">
-      <h3>Seoul saved these for you 🎁</h3>
-      <p>A city this good never shows you everything at once. · 서울이 아껴둔 것들</p>
+      <h3 class="disp">Seoul saved these for you</h3>
+      <p>A city this good never shows you everything at once. 서울이 아껴둔 것들.</p>
       <div id="missedList"></div>
-      <button class="wishbtn" id="wishBtn">📌 Save my next-trip wishlist</button>
+      <button class="wishbtn mono" id="wishBtn">Save my next-trip wishlist</button>
     </div>
     <div class="revisit">
-      <h3>Will you come back for the rest?</h3>
+      <h3 class="disp">Will you come back for the rest?</h3>
       <p>나머지를 채우러 다시 오고 싶나요?</p>
       <div class="rv" id="rvBtns">
-        <button data-v="yes">🇰🇷 Planning my next trip</button>
+        <button data-v="yes">Planning my next trip</button>
         <button data-v="maybe">Maybe</button>
         <button data-v="no">No</button>
       </div>
       <div class="thanks" id="rvThanks">Saved. Seoul will keep the rest warm for you.</div>
     </div>
     <div class="sharebar">
-      <button class="pri" id="shareBtn">Share my result</button>
+      <button class="pri" id="shareBtn">Share result</button>
       <button id="retryBtn">Swipe again</button>
     </div>
     <footer>
-      Built on official open data — Korea Tourism Data Lab (KTO): district popularity, hidden-spot rarity, night-tourism.<br>
-      Map boundaries: KOSTAT · Seoul Completion Map 2026
+      BUILT ON OFFICIAL OPEN DATA — KOREA TOURISM DATA LAB (KTO)<br>
+      DISTRICT POPULARITY · HIDDEN-SPOT RARITY · NIGHT TOURISM · SEOUL COMPLETION MAP 2026
     </footer>
   </div>
 </div>
 
-<script src="seoul_map.js?v=3"></script>
-<script src="data.js?v=3"></script>
+<script src="seoul_map.js?v=5"></script>
+<script src="data.js?v=5"></script>
 <script>
-/* ── 공통 ── */
-const CAT_STYLE = {
-  essential:{g:"linear-gradient(135deg,#e8f0f7,#d7e5f0)", badge:"📊 KTO data"},
-  hidden:{g:"linear-gradient(135deg,#fbf3e2,#f3e5c8)", badge:"📊 KTO data · rarity"},
-  night:{g:"linear-gradient(135deg,#e4e0ef,#d5cfe8)", badge:"📊 KTO night data"},
-  human:{g:"linear-gradient(135deg,#fbe9ee,#f5d9e2)", badge:""},
-  daily:{g:"linear-gradient(135deg,#eaf2e6,#dcead6)", badge:""},
-  kwave:{g:"linear-gradient(135deg,#f0e6f5,#e5d5ee)", badge:"K-Wave"},
-  season:{g:"linear-gradient(135deg,#fdeee6,#f8ddd0)", badge:""},
+/* ── 카테고리 인장(원형 스탬프) ── */
+const CAT_SEAL = {
+  essential:{txt:"OFFICIAL KTO DATA", c:"#3d4b60"},
+  hidden:{txt:"HIDDEN GEM · RARITY", c:"#8f7440"},
+  night:{txt:"AFTER DARK · KTO", c:"#4a4258"},
+  human:{txt:"SPOKEN SEOUL", c:"#9a4a63"},
+  daily:{txt:"LOCAL LIFE", c:"#4a6b4f"},
+  kwave:{txt:"K-WAVE PILGRIMAGE", c:"#6b4a8a"},
+  season:{txt:"SEASONAL ONLY", c:"#b0352b"},
 };
-const GU_COLORS = {"종로구":"#c73e3a","중구":"#b98a2f","용산구":"#8a5a44","마포구":"#c2557f","강남구":"#2a5d8f","성동구":"#4d7c57","송파구":"#5b7d9e","영등포구":"#d16a8a","서초구":"#7d6aa8","은평구":"#5a7d4f","강북구":"#8a9b5c","광진구":"#3d8a8a","성북구":"#a8556e"};
-const BASE = 2; // 부여된 진전 %
+function sealSVG(cat, id) {
+  const s = CAT_SEAL[cat] || CAT_SEAL.essential;
+  return `<svg class="seal" viewBox="0 0 100 100">
+    <defs><path id="cir${id}" d="M50,50 m-33,0 a33,33 0 1,1 66,0 a33,33 0 1,1 -66,0"/></defs>
+    <circle cx="50" cy="50" r="46" fill="none" stroke="${s.c}" stroke-width="2.5"/>
+    <circle cx="50" cy="50" r="26" fill="none" stroke="${s.c}" stroke-width="1.2"/>
+    <text fill="${s.c}" font-size="10.5" font-family="IBM Plex Mono, monospace" letter-spacing="2">
+      <textPath href="#cir${id}">${s.txt} · SEOUL ·</textPath>
+    </text>
+    <text x="50" y="55" text-anchor="middle" fill="${s.c}" font-size="13" font-family="Instrument Serif, serif">${cat === "season" ? "限" : "印"}</text>
+  </svg>`;
+}
+const GU_COLORS = {"종로구":"#a63a32","중구":"#8a6d3b","용산구":"#6b4a3a","마포구":"#9a4a63","강남구":"#3d4b60","성동구":"#4a6b4f","송파구":"#54636f","영등포구":"#9a5a6b","서초구":"#5d5470","은평구":"#5f7050","강북구":"#71764f","광진구":"#3f6b6b","성북구":"#7d4a5a"};
+const BASE = 2;
 const TOTALW = CARDS.reduce((a, c) => a + c.w, 0);
-const answers = new Array(CARDS.length).fill(null); // true/false
+const answers = new Array(CARDS.length).fill(null);
 let cursor = 0;
 
-/* ── 미니맵 & 결과맵 렌더 ── */
 function renderMap(svgEl, cls) {
   svgEl.setAttribute("viewBox", SEOUL_VIEWBOX);
   const ps = {};
@@ -220,8 +254,8 @@ function paintMaps() {
   });
   Object.keys(miniPaths).forEach(gu => {
     const on = (hit[gu] || 0) > 0;
-    const col = on ? (GU_COLORS[gu] || "#7a7f88") : "";
-    const op = on ? (.55 + .45 * (hit[gu] / (tot[gu] || 1))) : 1;
+    const col = on ? (GU_COLORS[gu] || "#6b6455") : "";
+    const op = on ? (.6 + .4 * (hit[gu] / (tot[gu] || 1))) : 1;
     [miniPaths[gu], bigPaths[gu]].forEach(p => { p.style.fill = col; p.style.opacity = op; });
   });
 }
@@ -235,23 +269,24 @@ function updateHud() {
 const stack = document.getElementById("stack");
 function makeCard(idx, pos) {
   const c = CARDS[idx];
-  const st = CAT_STYLE[c.cat] || CAT_STYLE.essential;
   const el = document.createElement("div");
   el.className = "card" + (pos === 1 ? " behind1" : pos === 2 ? " behind2" : "");
   el.dataset.idx = idx;
   el.innerHTML = `
-    <div class="head" style="background:${st.g}">
-      <span>${c.emoji}</span>
-      ${st.badge ? `<span class="data-badge">${st.badge}</span>` : ""}
-      ${c.season ? `<span class="season-badge">⏳ ${c.season.toUpperCase()} ONLY</span>` : ""}
-      <span class="stamp yes">BEEN ✓</span>
-      <span class="stamp no">NOT YET</span>
+    <div class="tick mono"><span>SEOUL COMPLETION MAP</span><span>NO. ${String(idx + 1).padStart(2, "0")} / ${CARDS.length}</span></div>
+    <div class="chead">
+      <div class="hood mono">${c.hood} · SEOUL</div>
+      <div class="nm disp">${c.en}</div>
+      <div class="ko">${c.ko}</div>
     </div>
-    <div class="body">
-      <div class="hood">${c.hood}</div>
-      <div class="nm">${c.en}<small>${c.ko}</small></div>
-      <div class="hk">${c.hook}</div>
-    </div>`;
+    <div class="rule"></div>
+    <div class="hk">${c.hook}</div>
+    <div class="cfoot">
+      ${c.season ? `<span class="season-note mono">⌛ ${c.season.toUpperCase()} ONLY — MISS IT, WAIT A YEAR</span>` : "<span></span>"}
+      ${sealSVG(c.cat, idx)}
+    </div>
+    <span class="stamp yes mono">BEEN ✓</span>
+    <span class="stamp no mono">NOT YET</span>`;
   return el;
 }
 function renderStack() {
@@ -262,42 +297,37 @@ function renderStack() {
   }
   attachDrag();
 }
-
-/* ── 스와이프 ── */
-function topCard() { return stack.querySelector(".card:not(.behind1):not(.behind2):last-child") || stack.lastElementChild; }
+function topCard() { return stack.lastElementChild; }
 function attachDrag() {
   const el = topCard(); if (!el) return;
   let sx = 0, sy = 0, dx = 0, dragging = false;
-  const onDown = e => { dragging = true; sx = e.clientX; sy = e.clientY; el.style.transition = "none"; el.setPointerCapture(e.pointerId); };
-  const onMove = e => {
+  el.addEventListener("pointerdown", e => { dragging = true; sx = e.clientX; sy = e.clientY; el.style.transition = "none"; el.setPointerCapture(e.pointerId); });
+  el.addEventListener("pointermove", e => {
     if (!dragging) return;
     dx = e.clientX - sx;
     const dy = e.clientY - sy;
     el.style.transform = `translate(${dx}px,${dy * .3}px) rotate(${dx / 18}deg)`;
     el.querySelector(".stamp.yes").style.opacity = Math.max(0, Math.min(1, dx / 90));
     el.querySelector(".stamp.no").style.opacity = Math.max(0, Math.min(1, -dx / 90));
-  };
-  const onUp = () => {
+  });
+  const up = () => {
     if (!dragging) return; dragging = false;
     if (dx > 85) fling(el, true);
     else if (dx < -85) fling(el, false);
     else { el.style.transition = "transform .25s"; el.style.transform = ""; el.querySelectorAll(".stamp").forEach(s => s.style.opacity = 0); }
     dx = 0;
   };
-  el.addEventListener("pointerdown", onDown);
-  el.addEventListener("pointermove", onMove);
-  el.addEventListener("pointerup", onUp);
-  el.addEventListener("pointercancel", onUp);
+  el.addEventListener("pointerup", up);
+  el.addEventListener("pointercancel", up);
 }
 function fling(el, yes) {
   answers[+el.dataset.idx] = yes;
   el.style.transition = "transform .35s ease-out, opacity .35s";
-  el.style.transform = `translate(${yes ? 480 : -480}px,-40px) rotate(${yes ? 24 : -24}deg)`;
+  el.style.transform = `translate(${yes ? 480 : -480}px,-40px) rotate(${yes ? 22 : -22}deg)`;
   el.style.opacity = 0;
   cursor++;
-  save();
-  updateHud();
-  setTimeout(() => { cursor >= CARDS.length ? showResult() : renderStack(); }, 240);
+  save(); updateHud();
+  setTimeout(() => { cursor >= CARDS.length ? showResult() : renderStack(); }, 230);
 }
 function answer(yes) { const el = topCard(); if (el) fling(el, yes); }
 document.getElementById("btnYes").addEventListener("click", () => answer(true));
@@ -308,66 +338,56 @@ document.addEventListener("keydown", e => {
   if (e.key === "ArrowLeft") answer(false);
 });
 
-/* ── 저장/이어하기 ── */
-function save() { localStorage.setItem("scm_v3", JSON.stringify({ answers, cursor })); }
-function load() {
-  try { return JSON.parse(localStorage.getItem("scm_v3") || "null"); } catch (e) { return null; }
-}
+function save() { localStorage.setItem("scm_v4", JSON.stringify({ answers, cursor })); }
+function load() { try { return JSON.parse(localStorage.getItem("scm_v4") || "null"); } catch (e) { return null; } }
 
-/* ── 화면 전환 ── */
 const scr = { start: document.getElementById("startScr"), deck: document.getElementById("deckScr"), result: document.getElementById("resultScr") };
-function show(name) {
-  Object.entries(scr).forEach(([k, el]) => el.style.display = (k === name ? "flex" : "none"));
-}
+function show(name) { Object.entries(scr).forEach(([k, el]) => el.style.display = (k === name ? "flex" : "none")); }
 document.getElementById("startBtn").addEventListener("click", () => {
   answers.fill(null); cursor = 0; save();
   show("deck"); renderStack(); updateHud();
   if (window.gtag) gtag('event', 'start_test');
 });
 
-/* ── 아키타입 ── */
 function archetype(p) {
-  if (p < 15) return ["🐣", "Seoul Rookie", "Your Seoul story hasn't even started. Lucky you — it's all ahead."];
-  if (p >= 85) return ["👑", "Honorary Seoulite", "Impossible in one trip. You've been coming back, haven't you?"];
-  if (p >= 65) return ["☕", "Almost Seoulite", "Your favorite café probably misses you."];
-  // 중간 구간: 패턴 분기
+  if (p < 15) return ["Seoul Rookie", "Your Seoul story hasn't even started. Lucky you — it's all ahead."];
+  if (p >= 85) return ["Honorary Seoulite", "Impossible in one trip. You've been coming back, haven't you?"];
+  if (p >= 65) return ["Almost Seoulite", "Your favorite café probably misses you."];
   const catScore = {};
   CARDS.forEach((c, i) => { if (answers[i]) catScore[c.cat] = (catScore[c.cat] || 0) + c.w; });
   const dom = Object.entries(catScore).sort((a, b) => b[1] - a[1])[0]?.[0];
-  if (dom === "night") return ["🦉", "Seoul Night Owl", "You know the city that wakes up after dark."];
-  if (dom === "hidden") return ["💎", "Hidden Gem Hunter", "You find the Seoul that guidebooks miss."];
-  if (dom === "human") return ["🗣️", "The People's Traveler", "You collect conversations, not just photos."];
-  if (dom === "kwave") return ["💜", "K-Wave Pilgrim", "You came for the culture — and you found it."];
-  if (p >= 40) return ["🧭", "Seoul Explorer", "Solidly beyond the guidebook. Seoul still has secrets though."];
-  return ["📖", "Guidebook Traveler", "You've seen the postcard Seoul. The real one is waiting."];
+  if (dom === "night") return ["Seoul Night Owl", "You know the city that wakes up after dark."];
+  if (dom === "hidden") return ["Hidden Gem Hunter", "You find the Seoul that guidebooks miss."];
+  if (dom === "human") return ["The People's Traveler", "You collect conversations, not just photos."];
+  if (dom === "kwave") return ["K-Wave Pilgrim", "You came for the culture — and you found it."];
+  if (p >= 40) return ["Seoul Explorer", "Solidly beyond the guidebook. Seoul still has secrets though."];
+  return ["Guidebook Traveler", "You've seen the postcard Seoul. The real one is waiting."];
 }
 
-/* ── 결과 ── */
 let lastMissed = [];
 function showResult() {
   const p = score();
-  const [em, nm, line] = archetype(p);
-  document.getElementById("archEmoji").textContent = em;
+  const [nm, line] = archetype(p);
   document.getElementById("archName").textContent = nm;
   document.getElementById("archLine").textContent = line;
-  document.getElementById("finalPct").textContent = p;
+  document.getElementById("finalPct").textContent = p + "%";
+  document.getElementById("visaDate").textContent = new Date().toISOString().slice(0, 10).replace(/-/g, ".");
+  document.getElementById("visaSeal").outerHTML = sealSVG("season", "visa").replace('class="seal"', 'class="vseal" id="visaSeal"').replace("SEASONAL ONLY", "VISA OF EXPERIENCE").replace(">限<", ">承<");
   const missed = CARDS.map((c, i) => ({ c, i })).filter(x => answers[x.i] === false);
   missed.sort((a, b) => b.c.w - a.c.w);
   lastMissed = missed;
   const gain = Math.round(missed.slice(0, 5).reduce((a, m) => a + m.c.w, 0) / TOTALW * (100 - BASE));
   document.getElementById("nextTrip").innerHTML = gain > 0
-    ? `<b>One more trip = +${gain}%p</b><p>Just 5 experiences would take you to ${Math.min(100, p + gain)}%. Seoul is patient.</p>`
-    : `<b>You've seen it all — this season</b><p>Come back in a different season. Seoul changes.</p>`;
-  document.getElementById("missedList").innerHTML = missed.slice(0, 3).map(m =>
-    `<div class="mc"><span class="em">${m.c.emoji}</span><span class="tx">${m.c.en}<small>${m.c.hook}</small></span></div>`).join("")
-    || "<p style='font-size:12.5px'>Nothing missed. Respect.</p>";
+    ? `<b class="disp">One more trip = +${gain} points</b><p>Just five experiences would take you to ${Math.min(100, p + gain)}%. Seoul is patient.</p>`
+    : `<b class="disp">You've seen it all — this season</b><p>Come back in a different season. Seoul changes.</p>`;
+  document.getElementById("missedList").innerHTML = missed.slice(0, 3).map((m, i) =>
+    `<div class="mc"><span class="no disp">${String(i + 1).padStart(2, "0")}</span><span class="tx">${m.c.en}<small>${m.c.hook}</small></span></div>`).join("")
+    || "<p style='font-size:12.5px;font-style:italic'>Nothing missed. Respect.</p>";
   show("result");
-  paintMaps();
-  save();
+  paintMaps(); save();
   if (window.gtag) gtag('event', 'complete_test', { score: p, archetype: nm });
 }
 
-/* ── 결과 버튼들 ── */
 document.getElementById("rvBtns").addEventListener("click", e => {
   const b = e.target.closest("button"); if (!b) return;
   document.querySelectorAll("#rvBtns button").forEach(x => x.classList.remove("sel"));
@@ -377,34 +397,47 @@ document.getElementById("rvBtns").addEventListener("click", e => {
 });
 document.getElementById("wishBtn").addEventListener("click", async () => {
   const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. ${m.c.en} — ${m.c.hood}`).join("\n");
-  const txt = `🇰🇷 My next Seoul trip wishlist\n${list}\n\nSeoul Completion Map · ${location.href}`;
+  const txt = `My next Seoul trip wishlist\n${list}\n\nSeoul Completion Map · ${location.href}`;
   try { await navigator.clipboard.writeText(txt); alert("Wishlist copied — paste it anywhere!"); } catch (e) {}
   if (window.gtag) gtag('event', 'save_wishlist');
 });
-document.getElementById("retryBtn").addEventListener("click", () => { localStorage.removeItem("scm_v3"); location.reload(); });
+document.getElementById("calBtn").addEventListener("click", () => {
+  // 다음 시즌 창: 봄 벚꽃(4/1~14) 또는 가까운 다음 계절 시작
+  const now = new Date();
+  const y = now.getMonth() >= 3 ? now.getFullYear() + 1 : now.getFullYear();
+  const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. ${m.c.en}`).join("\\n");
+  const ics = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//SeoulCompletionMap//EN","BEGIN:VEVENT",
+    `UID:scm-${Date.now()}@seoulmap`,
+    `DTSTART;VALUE=DATE:${y}0401`,`DTEND;VALUE=DATE:${y}0415`,
+    "SUMMARY:Seoul is calling — cherry blossom window 🌸",
+    `DESCRIPTION:Your unfinished Seoul map is waiting (${score()}% complete).\\nWishlist:\\n${list}\\n\\n${location.href}`,
+    "END:VEVENT","END:VCALENDAR"].join("\r\n");
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+  a.download = "seoul-next-trip.ics"; a.click();
+  if (window.gtag) gtag('event', 'save_calendar');
+});
+document.getElementById("retryBtn").addEventListener("click", () => { localStorage.removeItem("scm_v4"); location.reload(); });
 
-/* ── 공유: Canvas 결과 카드 ── */
 document.getElementById("shareBtn").addEventListener("click", async () => {
   const p = score();
-  const [em, nm] = archetype(p);
+  const [nm] = archetype(p);
   const W = 1080, H = 1350;
   const cv = document.createElement("canvas"); cv.width = W; cv.height = H;
   const x = cv.getContext("2d");
-  x.fillStyle = "#f4f2ee"; x.fillRect(0, 0, W, H);
-  x.fillStyle = "#191922"; x.textAlign = "center";
-  x.font = "700 40px -apple-system, sans-serif";
-  x.fillText("SEOUL COMPLETION MAP", W / 2, 110);
-  x.font = "160px -apple-system, sans-serif";
-  x.fillText(em, W / 2, 320);
-  x.font = "900 84px -apple-system, sans-serif";
-  x.fillText(nm, W / 2, 440);
-  x.font = "900 230px -apple-system, sans-serif";
-  x.fillStyle = "#c73e3a";
-  x.fillText(p + "%", W / 2, 700);
-  x.font = "600 36px -apple-system, sans-serif";
-  x.fillStyle = "#71717c";
-  x.fillText("of Seoul completed", W / 2, 760);
-  // 지도 그리기
+  x.fillStyle = "#f3efe5"; x.fillRect(0, 0, W, H);
+  x.strokeStyle = "#211d17"; x.lineWidth = 4; x.strokeRect(40, 40, W - 80, H - 80);
+  x.fillStyle = "#211d17"; x.textAlign = "center";
+  x.font = "600 34px 'IBM Plex Mono', monospace";
+  x.fillText("SEOUL COMPLETION MAP", W / 2, 140);
+  x.font = "italic 92px 'Instrument Serif', Georgia, serif";
+  x.fillText(nm, W / 2, 330);
+  x.font = "230px 'Instrument Serif', Georgia, serif";
+  x.fillStyle = "#b0352b";
+  x.fillText(p + "%", W / 2, 610);
+  x.font = "600 30px 'IBM Plex Mono', monospace";
+  x.fillStyle = "#7a7263";
+  x.fillText("OF SEOUL COMPLETED", W / 2, 670);
   try {
     const svgEl = document.getElementById("bigMap");
     const ser = new XMLSerializer().serializeToString(svgEl);
@@ -412,18 +445,18 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
     const url = URL.createObjectURL(blob);
     await new Promise(res => {
       const img = new Image();
-      img.onload = () => { x.drawImage(img, W / 2 - 330, 800, 660, 430); URL.revokeObjectURL(url); res(); };
+      img.onload = () => { x.drawImage(img, W / 2 - 320, 720, 640, 420); URL.revokeObjectURL(url); res(); };
       img.onerror = res;
       img.src = url;
     });
   } catch (e) {}
-  x.font = "600 32px -apple-system, sans-serif";
-  x.fillStyle = "#71717c";
-  x.fillText("How full is your map?", W / 2, 1290);
+  x.font = "italic 34px 'Instrument Serif', Georgia, serif";
+  x.fillStyle = "#211d17";
+  x.fillText("How full is your map?", W / 2, 1240);
   cv.toBlob(async blob => {
     const file = new File([blob], "seoul-map.png", { type: "image/png" });
     if (navigator.canShare && navigator.canShare({ files: [file] })) {
-      try { await navigator.share({ files: [file], text: `My Seoul map is ${p}% complete 🇰🇷`, url: location.href }); return; } catch (e) {}
+      try { await navigator.share({ files: [file], text: `My Seoul map is ${p}% complete`, url: location.href }); return; } catch (e) {}
     }
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob); a.download = "seoul-completion-map.png"; a.click();
@@ -431,20 +464,16 @@ document.getElementById("shareBtn").addEventListener("click", async () => {
   if (window.gtag) gtag('event', 'share', { score: p });
 });
 
-/* ── 초기화 ── */
 const saved = load();
 if (saved && saved.cursor > 0 && saved.cursor < CARDS.length) {
   const rb = document.getElementById("resumeBtn");
   rb.style.display = "block";
-  rb.textContent = `Continue where I left off (${saved.cursor}/${CARDS.length})`;
+  rb.textContent = `Continue where I left off — ${saved.cursor}/${CARDS.length}`;
   rb.addEventListener("click", () => {
     saved.answers.forEach((a, i) => answers[i] = a);
     cursor = saved.cursor;
     show("deck"); renderStack(); updateHud();
   });
-} else if (saved && saved.cursor >= CARDS.length) {
-  saved.answers.forEach((a, i) => answers[i] = a);
-  cursor = saved.cursor;
 }
 show("start");
 updateHud();
