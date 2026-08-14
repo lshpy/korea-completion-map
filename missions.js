@@ -1,5 +1,8 @@
-/* The Seoul Local Test — 미션 덱 18 (2026-08-14)
-   장소 선정: 데이터랩 인기관광지·야간·연관 + 군집분석. 현지인/외지인 갭 지수로 보강 예정 */
+/* The Seoul Local Test — 미션 덱 18 (2026-08-14, data v2)
+   pts = ERI(Experience Rarity Index): 2 + 장소희소성(8×LGI 또는 8×(1-외국인노출)) + 조건희소성 + 상호작용
+   LGI(Local Gap Index) = 내비 실수요 백분위 × (1 - 관광객 방문비중/구내최대) — 데이터랩 검색순위(구별 최대 501곳)×인기관광지(KT)
+   외국인노출(FE) = 동 외국인 관광객수 / 명동(4,958,912명) — 데이터랩 방문자 급등동네
+   data{} = 카드 뒷면 차트용 원자료 */
 const MISSIONS = [
  {
   "id": 1,
@@ -15,9 +18,10 @@ const MISSIONS = [
    "gu": "종로구"
   },
   "how": "Ask the stall auntie, then eat whatever she says. No menu browsing allowed.",
-  "basis": "Seoul night-tourism data: Jongno late-night classic",
-  "pts": 10,
-  "cat": "talk"
+  "basis": "Navi data: Koreans' #5 destination of 501 in Jongno — yet not in the tourist top-30. LGI 0.99",
+  "pts": 13,
+  "cat": "talk",
+  "data": { "type": "lgi", "naviRank": 5, "naviTotal": 501, "touristShare": 0, "lgi": 0.99 }
  },
  {
   "id": 2,
@@ -34,8 +38,9 @@ const MISSIONS = [
   },
   "how": "Say it loud enough for the owner to hear, on your way out. Watch their face.",
   "basis": "The phrase that opens Seoul",
-  "pts": 6,
-  "cat": "talk"
+  "pts": 7,
+  "cat": "talk",
+  "data": { "type": "free" }
  },
  {
   "id": 3,
@@ -51,10 +56,11 @@ const MISSIONS = [
    "gu": "중구"
   },
   "how": "Order gukbap. Take one spoon of scalding broth. Exhale the word. You're one of us now.",
-  "basis": "KTO data: Sindang = Seoul's #1 night neighborhood (53.6%)",
-  "pts": 10,
+  "basis": "KTO data: this block gets 1/79 of Myeongdong's foreign visitors — and they're up +45% this year",
+  "pts": 14,
   "cat": "talk",
-  "special": "night"
+  "special": "night",
+  "data": { "type": "surge", "dong": "Hwanghak-dong", "visitors": 62455, "growth": 45.2, "vsMyeongdong": 79 }
  },
  {
   "id": 4,
@@ -70,9 +76,10 @@ const MISSIONS = [
    "gu": "종로구"
   },
   "how": "Buy something small, chat a little, and see if a bonus appears. It's earned, not asked.",
-  "basis": "Navigation data: the market palace visitors miss",
-  "pts": 12,
-  "cat": "talk"
+  "basis": "Navi #25 of 501 in Jongno, 0% tourist visit share. LGI 0.95",
+  "pts": 13,
+  "cat": "talk",
+  "data": { "type": "lgi", "naviRank": 25, "naviTotal": 501, "touristShare": 0, "lgi": 0.95 }
  },
  {
   "id": 5,
@@ -88,9 +95,10 @@ const MISSIONS = [
    "gu": "성동구"
   },
   "how": "Order fully in Korean at Seoul's Brooklyn. Bonus points if they don't switch to English.",
-  "basis": "KTO data: Seoul Forest area = 35.4% of Seongsu visits",
-  "pts": 8,
-  "cat": "talk"
+  "basis": "KTO data: foreign visits to Seongsu +135% in one year — Seoul's fastest-rising neighborhood",
+  "pts": 12,
+  "cat": "talk",
+  "data": { "type": "surge", "dong": "Seongsu 2-ga", "visitors": 778527, "growth": 135.3, "vsMyeongdong": 6 }
  },
  {
   "id": 6,
@@ -107,8 +115,9 @@ const MISSIONS = [
   },
   "how": "Leave any store with this. There is no English word for it. That's the point.",
   "basis": "The word that doesn't translate",
-  "pts": 6,
-  "cat": "talk"
+  "pts": 7,
+  "cat": "talk",
+  "data": { "type": "free" }
  },
  {
   "id": 7,
@@ -124,9 +133,10 @@ const MISSIONS = [
    "gu": "영등포구"
   },
   "how": "Cook it yourself at the ramyeon machine. Eat facing the river. 3,000-won fine dining.",
-  "basis": "KTO data: 44.3% of Yeongdeungpo visits = this riverside",
-  "pts": 8,
-  "cat": "live"
+  "basis": "KTO data: 44.3% of Yeongdeungpo tourist visits = this riverside. Easy entry — the local part is the ramyeon",
+  "pts": 4,
+  "cat": "live",
+  "data": { "type": "anchor", "touristShare": 44.3 }
  },
  {
   "id": 8,
@@ -142,10 +152,11 @@ const MISSIONS = [
    "gu": null
   },
   "how": "Return to a café you liked. Say this. If they remember you — mission complete, Regular unlocked.",
-  "basis": "단골(regular) is Seoul's highest honor",
-  "pts": 15,
+  "basis": "단골(regular) is Seoul's highest honor. Requires two physical visits — the rarest condition in this deck",
+  "pts": 12,
   "cat": "live",
-  "special": "revisit"
+  "special": "revisit",
+  "data": { "type": "free", "condition": "two visits" }
  },
  {
   "id": 9,
@@ -162,8 +173,9 @@ const MISSIONS = [
   },
   "how": "Sing one Korean song. Any decade. Scoring machine's opinion doesn't count.",
   "basis": "Where Koreans actually go after dinner",
-  "pts": 8,
-  "cat": "live"
+  "pts": 6,
+  "cat": "live",
+  "data": { "type": "free" }
  },
  {
   "id": 10,
@@ -180,8 +192,9 @@ const MISSIONS = [
   },
   "how": "Board line 2. Get off somewhere you can't pronounce. Walk 30 minutes. No maps.",
   "basis": "How locals know their city",
-  "pts": 10,
-  "cat": "live"
+  "pts": 6,
+  "cat": "live",
+  "data": { "type": "free" }
  },
  {
   "id": 11,
@@ -197,9 +210,10 @@ const MISSIONS = [
    "gu": "강남구"
   },
   "how": "Lunch-walk a UNESCO royal tomb between Gangnam towers, like the office workers do.",
-  "basis": "KTO data: only 1.2% of Gangnam visitors find it",
-  "pts": 12,
-  "cat": "find"
+  "basis": "Navi #27 of 502 in Gangnam, but only 1.2% of tourist visits. LGI 0.92",
+  "pts": 10,
+  "cat": "find",
+  "data": { "type": "lgi", "naviRank": 27, "naviTotal": 502, "touristShare": 1.2, "lgi": 0.92 }
  },
  {
   "id": 12,
@@ -215,9 +229,10 @@ const MISSIONS = [
    "gu": "종로구"
   },
   "how": "Climb the old fortress wall at golden hour. Locals bring beer. You should too.",
-  "basis": "Cluster analysis: the wall walk guidebooks skip",
-  "pts": 10,
-  "cat": "find"
+  "basis": "Navi #10 of 501 in Jongno, 4.1% tourist share — the wall walk guidebooks skip. LGI 0.71",
+  "pts": 9,
+  "cat": "find",
+  "data": { "type": "lgi", "naviRank": 10, "naviTotal": 501, "touristShare": 4.1, "lgi": 0.71 }
  },
  {
   "id": 13,
@@ -233,9 +248,10 @@ const MISSIONS = [
    "gu": "성동구"
   },
   "how": "Buy a mat at the convenience store. Join the grass. Stay till the deer-shaped lamps glow.",
-  "basis": "KTO data: Seongsu's #1 — but tourists pass through in 20 min",
-  "pts": 8,
-  "cat": "find"
+  "basis": "KTO data: Seongsu's #1 anchor (35.4% of visits) — tourists pass through in 20 min. The mission is to stay",
+  "pts": 4,
+  "cat": "find",
+  "data": { "type": "anchor", "touristShare": 35.4 }
  },
  {
   "id": 14,
@@ -251,9 +267,10 @@ const MISSIONS = [
    "gu": "광진구"
   },
   "how": "Van Gogh projected on every wall. Sit on the floor. Koreans cry here; you're allowed to.",
-  "basis": "KTO data: 0.7% visit share — the algorithm hasn't found it",
-  "pts": 12,
-  "cat": "find"
+  "basis": "Navi #31 of 313 in Gwangjin, 0.7% tourist share — the algorithm hasn't found it. LGI 0.88",
+  "pts": 10,
+  "cat": "find",
+  "data": { "type": "lgi", "naviRank": 31, "naviTotal": 313, "touristShare": 0.7, "lgi": 0.88 }
  },
  {
   "id": 15,
@@ -269,10 +286,11 @@ const MISSIONS = [
    "gu": "강남구"
   },
   "how": "Find your group's GangnamDol bear. Ask another fan the question. Instant friendship.",
-  "basis": "The idol-agency alley",
-  "pts": 8,
+  "basis": "KTO data: foreign visits to Apgujeong +42% this year — the idol-agency alley is being found",
+  "pts": 10,
   "cat": "find",
-  "special": "kwave"
+  "special": "kwave",
+  "data": { "type": "surge", "dong": "Apgujeong-dong", "visitors": 708365, "growth": 42.0, "vsMyeongdong": 7 }
  },
  {
   "id": 16,
@@ -291,7 +309,8 @@ const MISSIONS = [
   "basis": "The rule every Korean knows",
   "pts": 10,
   "cat": "live",
-  "special": "weather"
+  "special": "weather",
+  "data": { "type": "free", "condition": "rain" }
  },
  {
   "id": 17,
@@ -308,9 +327,10 @@ const MISSIONS = [
   },
   "how": "Two weeks a year. Miss it, wait fifty more. The calendar decides, not you.",
   "basis": "Seasonal window: early April only",
-  "pts": 15,
+  "pts": 9,
   "cat": "find",
-  "special": "season-spring"
+  "special": "season-spring",
+  "data": { "type": "anchor", "touristShare": 44.3, "condition": "2 weeks/year" }
  },
  {
   "id": 18,
@@ -327,8 +347,9 @@ const MISSIONS = [
   },
   "how": "Only a few mornings a year. When Seoul wakes up white, drop everything and go.",
   "basis": "Seasonal window: a handful of days",
-  "pts": 15,
+  "pts": 9,
   "cat": "find",
-  "special": "season-winter"
+  "special": "season-winter",
+  "data": { "type": "anchor", "touristShare": 14.7, "condition": "a few days/year" }
  }
 ];
