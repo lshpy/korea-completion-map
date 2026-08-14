@@ -1,96 +1,53 @@
-/* 자동 생성 — 데이터랩 산출 항목 (엔진 v1.3, 2026-08-13)
-   '사람의 한국'은 외래관광객조사 만족요인 기반 질적 큐레이션 */
+/* 자동 생성 — Seoul Completion Map 항목 (엔진 v2-Seoul, 2026-08-13)
+   데이터 산출: 첫 번째 서울·숨은 곳·서울의 밤·한 걸음 더(일부) — 데이터랩 인기관광지·야간관광·연관지도 */
 const CATS = [
  {
   "icon": "🏛️",
-  "n": "첫 번째 한국",
-  "e": "The First Korea",
-  "d": "각 지역 방문 1위 — 데이터랩 인기관광지 기준",
+  "n": "첫 번째 서울",
+  "e": "The Essential Seoul",
+  "d": "각 구 방문 1위 — 데이터랩 인기관광지 기준 · No.1 spot of each district, by tourism data",
   "items": [
    {
-    "t": "전주한옥마을 (전주)",
-    "en": "Jeonju — No.1 spot",
+    "t": "팔각정북악스카이",
+    "en": "No.1 spot in 종로구",
     "w": 1.0,
-    "region": "jeonbuk",
-    "hint": "📊 전주 방문 점유 1위(56.0%) · 인기관광지"
+    "region": "종로구",
+    "hint": "📊 종로구 방문 점유 1위(14.9%)"
    },
    {
-    "t": "함덕해수욕장 (제주)",
-    "en": "Jeju — No.1 spot",
+    "t": "서울월드컵경기장",
+    "en": "No.1 spot in 마포구",
     "w": 1.0,
-    "region": "jeju",
-    "hint": "📊 제주 방문 점유 1위(10.6%) · 인기관광지"
+    "region": "마포구",
+    "hint": "📊 마포구 방문 점유 1위(18.1%)"
    },
    {
-    "t": "불국사 (경주)",
-    "en": "Gyeongju — No.1 spot",
+    "t": "국립중앙박물관",
+    "en": "No.1 spot in 용산구",
     "w": 1.0,
-    "region": "gyeongbuk",
-    "hint": "📊 경주 방문 점유 1위(16.2%) · 인기관광지"
+    "region": "용산구",
+    "hint": "📊 용산구 방문 점유 1위(27.7%)"
    },
    {
-    "t": "경포해변 (강릉)",
-    "en": "Gangneung — No.1 spot",
+    "t": "코엑스",
+    "en": "No.1 spot in 강남구",
     "w": 1.0,
-    "region": "gangwon",
-    "hint": "📊 강릉 방문 점유 1위(14.6%) · 인기관광지"
+    "region": "강남구",
+    "hint": "📊 강남구 방문 점유 1위(43.9%)"
    },
    {
-    "t": "벡스코제1전시장 (부산 해운대)",
-    "en": "Haeundae — No.1 spot",
+    "t": "서울숲",
+    "en": "No.1 spot in 성동구",
     "w": 1.0,
-    "region": "gyeongnam",
-    "hint": "📊 부산 해운대 방문 점유 1위(17.7%) · 인기관광지"
+    "region": "성동구",
+    "hint": "📊 성동구 방문 점유 1위(35.4%)"
    },
    {
-    "t": "팔각정북악스카이 (서울 종로)",
-    "en": "Jongno — No.1 spot",
+    "t": "국립극장",
+    "en": "No.1 spot in 중구",
     "w": 1.0,
-    "region": "seoul",
-    "hint": "📊 서울 종로 방문 점유 1위(14.9%) · 인기관광지"
-   },
-   {
-    "t": "서울월드컵경기장 (서울 마포)",
-    "en": "Mapo (Hongdae) — No.1 spot",
-    "w": 1.0,
-    "region": "seoul",
-    "hint": "📊 서울 마포 방문 점유 1위(18.1%) · 인기관광지"
-   }
-  ]
- },
- {
-  "icon": "🧭",
-  "n": "연결된 한국",
-  "e": "One Step Further",
-  "d": "내비게이션 연계방문 데이터가 찾은 '함께 가는 곳'",
-  "items": [
-   {
-    "t": "동궁과월지 → 첨성대",
-    "en": "Visitors of 동궁과월지 also go here (navigation data)",
-    "w": 4.0,
-    "region": "gyeongbuk",
-    "hint": "📊 내비 연계방문 — 동궁과월지의 연관 상위"
-   },
-   {
-    "t": "강릉중앙시장 → 경포해변",
-    "en": "Visitors of 강릉중앙시장 also go here (navigation data)",
-    "w": 4.0,
-    "region": "gangwon",
-    "hint": "📊 내비 연계방문 — 강릉중앙시장의 연관 상위"
-   },
-   {
-    "t": "팔각정북악스카이 → 북악스카이웨이",
-    "en": "Visitors of 팔각정북악스카이 also go here (navigation data)",
-    "w": 4.0,
-    "region": "seoul",
-    "hint": "📊 내비 연계방문 — 팔각정북악스카이의 연관 상위"
-   },
-   {
-    "t": "협재해수욕장 → 오설록티뮤지엄",
-    "en": "Visitors of 협재해수욕장 also go here (navigation data)",
-    "w": 4.0,
-    "region": "jeju",
-    "hint": "📊 내비 연계방문 — 협재해수욕장의 연관 상위"
+    "region": "중구",
+    "hint": "📊 중구 방문 점유 1위(27.7%)"
    }
   ]
  },
@@ -98,143 +55,143 @@ const CATS = [
   "icon": "💎",
   "n": "데이터가 찾은 숨은 곳",
   "e": "Hidden Gems by Data",
-  "d": "방문 점유율이 낮을수록 높은 점수 — 희소성 가중치",
+  "d": "방문 점유율이 낮을수록 높은 점수 — 희소성 가중치 · The lower the visit share, the higher the score",
   "items": [
    {
-    "t": "전주난장 (전주)",
-    "en": "Hidden gem in Jeonju",
-    "w": 5,
-    "region": "jeonbuk",
-    "hint": "📊 점유 1.6% — 데이터가 찾은 저노출 지점"
+    "t": "서울공예박물관",
+    "en": "Hidden gem in 종로구",
+    "w": 4.1,
+    "region": "종로구",
+    "hint": "📊 점유 1.0% — 데이터가 찾은 저노출 지점"
    },
    {
-    "t": "성촌공원 (서울 용산)",
-    "en": "Hidden gem in Yongsan (Itaewon)",
-    "w": 5,
-    "region": "seoul",
-    "hint": "📊 점유 0.8% — 데이터가 찾은 저노출 지점"
-   },
-   {
-    "t": "대천공원 (부산 해운대)",
-    "en": "Hidden gem in Haeundae",
-    "w": 5,
-    "region": "gyeongnam",
-    "hint": "📊 점유 0.5% — 데이터가 찾은 저노출 지점"
-   },
-   {
-    "t": "국토발전전시관 (서울 중구)",
-    "en": "Hidden gem in Jung-gu (Myeongdong)",
-    "w": 5,
-    "region": "seoul",
-    "hint": "📊 점유 0.8% — 데이터가 찾은 저노출 지점"
-   },
-   {
-    "t": "소극장산울림 (서울 마포)",
-    "en": "Hidden gem in Mapo (Hongdae)",
+    "t": "소극장산울림",
+    "en": "Hidden gem in 마포구",
     "w": 4.8,
-    "region": "seoul",
+    "region": "마포구",
     "hint": "📊 점유 0.7% — 데이터가 찾은 저노출 지점"
    },
    {
-    "t": "강릉선교장 (강릉)",
-    "en": "Hidden gem in Gangneung",
-    "w": 4.2,
-    "region": "gangwon",
-    "hint": "📊 점유 0.9% — 데이터가 찾은 저노출 지점"
+    "t": "성촌공원",
+    "en": "Hidden gem in 용산구",
+    "w": 5,
+    "region": "용산구",
+    "hint": "📊 점유 0.8% — 데이터가 찾은 저노출 지점"
    },
    {
-    "t": "서울공예박물관 (서울 종로)",
-    "en": "Hidden gem in Jongno",
-    "w": 4.1,
-    "region": "seoul",
-    "hint": "📊 점유 1.0% — 데이터가 찾은 저노출 지점"
+    "t": "선정릉",
+    "en": "Hidden gem in 강남구",
+    "w": 5,
+    "region": "강남구",
+    "hint": "📊 점유 1.2% — 데이터가 찾은 저노출 지점"
+   },
+   {
+    "t": "청계천박물관",
+    "en": "Hidden gem in 성동구",
+    "w": 5,
+    "region": "성동구",
+    "hint": "📊 점유 1.1% — 데이터가 찾은 저노출 지점"
+   },
+   {
+    "t": "국토발전전시관",
+    "en": "Hidden gem in 중구",
+    "w": 5,
+    "region": "중구",
+    "hint": "📊 점유 0.8% — 데이터가 찾은 저노출 지점"
+   }
+  ]
+ },
+ {
+  "icon": "🧭",
+  "n": "한 걸음 더",
+  "e": "One Step Further",
+  "d": "함께 가면 완성되는 조합 · Pairs that complete each other",
+  "items": [
+   {
+    "t": "팔각정북악스카이 → 북악스카이웨이 드라이브",
+    "en": "The road Koreans pair with Bukak Pavilion (navigation data)",
+    "w": 4.0,
+    "region": "종로구",
+    "hint": "📊 내비 연계방문 — 종로 중심관광지의 연관 상위"
+   },
+   {
+    "t": "경복궁 → 서촌 골목·통인시장",
+    "en": "Gyeongbokgung → Seochon alleys & Tongin market",
+    "w": 4,
+    "region": "종로구",
+    "hint": "고궁까지 가고도 대부분 여기를 놓칩니다 · Most palace visitors miss this"
+   },
+   {
+    "t": "성수동 카페거리 → 서울숲 저녁 산책",
+    "en": "Seongsu café streets → Seoul Forest at dusk",
+    "w": 4,
+    "region": "성동구",
+    "hint": ""
    }
   ]
  },
  {
   "icon": "🌙",
-  "n": "밤의 한국",
-  "e": "Korea After Dark",
-  "d": "야간관광 데이터 기준 인기 밤동네",
+  "n": "서울의 밤",
+  "e": "Seoul After Dark",
+  "d": "야간관광 데이터가 찾은 밤 동네 · Night neighborhoods found by night-tourism data",
   "items": [
    {
-    "t": "중구 신당5동의 밤",
-    "en": "Night out in 신당5동",
+    "t": "신당5동의 밤",
+    "en": "Night out in 신당5동, 중구",
     "w": 4.5,
-    "region": "seoul",
-    "hint": "📊 야간 방문 비율 53.55% — 서울특별시 야간 1위 동네"
+    "region": "중구",
+    "hint": "📊 야간 방문 비율 53.55% — 서울 야간 1위 동네"
    },
    {
-    "t": "연제구 거제4동의 밤",
-    "en": "Night out in 거제4동",
+    "t": "이태원1동의 밤",
+    "en": "Night out in 이태원1동, 용산구",
     "w": 4.5,
-    "region": "gyeongnam",
-    "hint": "📊 야간 방문 비율 49.01% — 부산광역시 야간 1위 동네"
+    "region": "용산구",
+    "hint": "📊 야간 방문 비율 53.37% — 서울 야간 2위 동네"
    },
    {
-    "t": "안동시 평화동의 밤",
-    "en": "Night out in 평화동",
+    "t": "갈현1동의 밤",
+    "en": "Night out in 갈현1동, 은평구",
     "w": 4.5,
-    "region": "gyeongbuk",
-    "hint": "📊 야간 방문 비율 52.67% — 경상북도 야간 1위 동네"
+    "region": "은평구",
+    "hint": "📊 야간 방문 비율 53.02% — 서울 야간 3위 동네"
    },
    {
-    "t": "광장시장·포장마차 밤 야식",
-    "en": "Late-night street food",
+    "t": "서림동의 밤",
+    "en": "Night out in 서림동, 관악구",
+    "w": 4.5,
+    "region": "관악구",
+    "hint": "📊 야간 방문 비율 51.0% — 서울 야간 4위 동네"
+   },
+   {
+    "t": "천호3동의 밤",
+    "en": "Night out in 천호3동, 강동구",
+    "w": 4.5,
+    "region": "강동구",
+    "hint": "📊 야간 방문 비율 50.86% — 서울 야간 5위 동네"
+   },
+   {
+    "t": "광장시장 밤 야식",
+    "en": "Late-night street food at Gwangjang market",
     "w": 4,
-    "region": "seoul",
+    "region": "종로구",
     "hint": ""
    },
    {
-    "t": "한강 밤 돗자리 + 라면",
-    "en": "Han River picnic at night",
+    "t": "한강 밤 돗자리 + 편의점 라면",
+    "en": "Han River night picnic + convenience-store ramyeon",
     "w": 4,
-    "region": "seoul",
-    "hint": ""
-   }
-  ]
- },
- {
-  "icon": "🍙",
-  "n": "사는 사람의 한국",
-  "e": "Korea Aesthetic",
-  "d": "관광지가 아니라 일상 — SNS가 사랑하는 장면들",
-  "items": [
-   {
-    "t": "편의점 야식 조합 만들기",
-    "en": "Convenience-store feast",
-    "w": 3,
-    "region": "seoul",
-    "hint": ""
-   },
-   {
-    "t": "동네 목욕탕·찜질방",
-    "en": "Local jjimjilbang",
-    "w": 4,
-    "region": "chung",
-    "hint": ""
-   },
-   {
-    "t": "단골처럼 두 번 간 카페·식당",
-    "en": "Visit the same café twice",
-    "w": 5,
-    "region": "seoul",
-    "hint": "두 번 가는 순간 여행이 생활이 됩니다"
-   },
-   {
-    "t": "시골 오일장 구경",
-    "en": "Countryside 5-day market",
-    "w": 5,
-    "region": "jeonnam",
+    "region": null,
     "hint": ""
    }
   ]
  },
  {
   "icon": "🗣️",
-  "n": "사람의 한국",
-  "e": "The Human Korea",
-  "d": "말 한마디가 여행을 바꿉니다 — 진짜 한국은 대화 속에 있으니까 · Real Korea lives in conversations",
+  "n": "사람의 서울",
+  "e": "The Human Seoul",
+  "d": "말 한마디가 여행을 바꿉니다 · Real Seoul lives in conversations",
   "items": [
    {
     "t": "식당 나올 때 \"잘 먹었습니다!\"",
@@ -258,11 +215,25 @@ const CATS = [
     "hint": "단골 같아 보여야 나옵니다 · You earn it by feeling like a regular"
    },
    {
-    "t": "사투리 한마디 배우기 (부산 \"마!\" · 제주 방언)",
-    "en": "Pick up dialect — Busan satoori or Jeju words",
-    "w": 5,
+    "t": "뜨거운 국물 먹으며 \"시원~하다!\"",
+    "en": "Eat scalding-hot soup and say \"siwonhada!\" (so refreshing!)",
+    "w": 4,
     "region": null,
-    "hint": "표준어만 알면 한국의 절반만 아는 것 · Standard Korean is only half of Korea"
+    "hint": "한국인만 이해하는 역설 · The paradox only Koreans understand"
+   },
+   {
+    "t": "가게 나올 때 \"수고하세요~\"",
+    "en": "Leave any shop with \"sugohaseyo~\" — an untranslatable goodbye",
+    "w": 4,
+    "region": null,
+    "hint": "'수고'는 영어에 없는 단어입니다 · No English word for this exists"
+   },
+   {
+    "t": "\"금강산도 식후경\" — 밥부터 먹고 관광하기",
+    "en": "Live the proverb: even the best view comes after a meal",
+    "w": 3,
+    "region": null,
+    "hint": "사자성어를 행동으로 · A Korean proverb, practiced"
    },
    {
     "t": "노래방에서 한국 노래 한 곡",
@@ -277,67 +248,82 @@ const CATS = [
     "w": 3,
     "region": null,
     "hint": ""
-   },
+   }
+  ]
+ },
+ {
+  "icon": "🍜",
+  "n": "사는 사람의 서울",
+  "e": "Seoul Aesthetic",
+  "d": "관광지가 아니라 일상 — SNS가 사랑하는 장면들 · Everyday Seoul the internet loves",
+  "items": [
    {
-    "t": "뜨거운 국물 먹으며 \"시원~하다!\"",
-    "en": "Eat scalding-hot soup and say \"siwonhada!\" (so refreshing!)",
-    "w": 4,
-    "region": null,
-    "hint": "한국인만 이해하는 역설 · The paradox only Koreans understand"
-   },
-   {
-    "t": "가게 나올 때 \"수고하세요~\"",
-    "en": "Leave any shop with \"sugohaseyo~\" — an untranslatable goodbye",
-    "w": 4,
-    "region": null,
-    "hint": "'수고'는 영어에 없는 단어입니다 · There is no English word for this"
-   },
-   {
-    "t": "\"금강산도 식후경\" — 밥부터 먹고 관광하기",
-    "en": "Live the proverb \"geumgangsando sikhugyeong\" — even the best view comes after a meal",
+    "t": "편의점 야식 조합 만들기",
+    "en": "Build your own convenience-store feast",
     "w": 3,
     "region": null,
-    "hint": "사자성어를 행동으로 · A 4-character proverb, practiced"
+    "hint": ""
+   },
+   {
+    "t": "지하철 타고 목적지 없이 동네 탐험",
+    "en": "Ride the subway with no destination",
+    "w": 4,
+    "region": null,
+    "hint": ""
+   },
+   {
+    "t": "동네 목욕탕·찜질방",
+    "en": "Sweat it out at a jjimjilbang",
+    "w": 4,
+    "region": null,
+    "hint": ""
+   },
+   {
+    "t": "단골처럼 두 번 간 카페·식당",
+    "en": "Visit the same café twice, like a regular",
+    "w": 5,
+    "region": null,
+    "hint": "두 번 가는 순간 여행이 생활이 됩니다 · Twice makes you a local"
    }
   ]
  },
  {
   "icon": "🌸",
-  "n": "계절의 한국",
-  "e": "Four Koreas",
-  "d": "한국은 계절마다 다른 나라 — 한 번에 못 봅니다",
+  "n": "서울의 사계절",
+  "e": "Four Seasons of Seoul",
+  "d": "서울은 계절마다 다른 도시 — 한 번에 못 봅니다 · Seoul is four cities. You can't see them in one trip",
   "items": [
    {
-    "t": "봄 — 벚꽃 (진해·여의도·경주)",
-    "en": "Spring — cherry blossoms",
+    "t": "봄 — 여의도 벚꽃",
+    "en": "Spring — cherry blossoms at Yeouido",
     "w": 5,
     "season": "spring",
-    "region": "gyeongbuk",
+    "region": "영등포구",
     "hint": ""
    },
    {
-    "t": "여름 — 밤바다와 계곡",
-    "en": "Summer — night beaches",
+    "t": "여름 — 한강 밤과 치맥",
+    "en": "Summer — Han River nights & chimaek",
     "w": 4,
     "season": "summer",
-    "region": "gangwon",
+    "region": null,
     "hint": ""
    },
    {
-    "t": "가을 — 단풍 (내장산·설악산)",
-    "en": "Autumn — foliage",
+    "t": "가을 — 덕수궁 돌담길 단풍",
+    "en": "Autumn — foliage along Deoksugung stone wall",
     "w": 5,
     "season": "autumn",
-    "region": "gangwon",
+    "region": "중구",
     "hint": ""
    },
    {
-    "t": "겨울 — 눈 한옥·빙어축제",
-    "en": "Winter — snow hanok",
+    "t": "겨울 — 눈 내린 경복궁",
+    "en": "Winter — Gyeongbokgung under snow",
     "w": 5,
     "season": "winter",
-    "region": "gangwon",
-    "hint": ""
+    "region": "종로구",
+    "hint": "1년에 며칠뿐입니다 · Only a few days a year"
    }
   ]
  }
