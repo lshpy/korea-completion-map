@@ -53,10 +53,37 @@ body{font-family:"Noto Serif KR",Georgia,serif;background:var(--paper);color:var
 .endow p b{color:var(--ink);font-weight:600}
 .cover-note{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:var(--faint);padding-top:14px;text-align:center}
 
+/* ── 조각보 스트립 (오방색 muted) ── */
+.jogakbo{display:grid;grid-template-columns:2fr 1fr 1.6fr 1fr 1.3fr 1fr;gap:2px;background:var(--ink);border:1.5px solid var(--ink);height:14px;margin:12px 0 0}
+.jogakbo i{display:block}
+.jogakbo i:nth-child(1){background:#b0352b}.jogakbo i:nth-child(2){background:#f3efe5}
+.jogakbo i:nth-child(3){background:#3d5a73}.jogakbo i:nth-child(4){background:#c19a3d}
+.jogakbo i:nth-child(5){background:#6f8f7a}.jogakbo i:nth-child(6){background:#f3efe5}
+
 /* ── 카드 덱: 옛 티켓/여권 낱장 ── */
 #deckScr{display:none;padding-top:16px}
-.stack{position:relative;flex:1;min-height:400px;max-height:490px}
-.card{position:absolute;inset:0;background:var(--paper2);border:1.5px solid var(--ink);display:flex;flex-direction:column;overflow:hidden;touch-action:none;user-select:none;box-shadow:5px 5px 0 rgba(33,29,23,.12)}
+.stack{position:relative;flex:1;min-height:400px;max-height:490px;perspective:1400px}
+.card{position:absolute;inset:0;touch-action:none;user-select:none;background:transparent}
+.cin{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,.1,.2,1)}
+.card.flipped .cin{transform:rotateY(180deg)}
+.cface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:var(--paper2);border:1.5px solid var(--ink);display:flex;flex-direction:column;overflow:hidden;box-shadow:5px 5px 0 rgba(33,29,23,.12)}
+.cface.back{transform:rotateY(180deg)}
+.bgword{position:absolute;right:-8px;bottom:-30px;font-family:"Noto Serif KR",serif;font-weight:900;font-size:130px;line-height:1;color:var(--ink);opacity:.05;pointer-events:none;letter-spacing:-.06em;white-space:nowrap}
+.slabel{font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.24em;color:var(--faint);display:block;padding-bottom:2px}
+.flipchip{margin:10px 18px 0;border:1px dashed var(--faint);background:transparent;color:var(--faint);padding:7px 10px;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;cursor:pointer;text-transform:uppercase;text-align:left}
+.flipchip b{color:var(--stamp)}
+/* 카드 뒷면: 데이터 */
+.back-h{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--faint);display:flex;justify-content:space-between}
+.back-big{padding:20px 18px 4px}
+.back-big .n{font-family:"Instrument Serif",serif;font-size:54px;line-height:1;color:var(--stamp)}
+.back-big .l{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.16em;color:var(--faint);padding-top:6px;text-transform:uppercase}
+.dbars{padding:14px 18px 0;display:flex;flex-direction:column;gap:12px}
+.dbar .lb{display:flex;justify-content:space-between;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;color:var(--ink);padding-bottom:4px}
+.dbar .lb span:last-child{color:var(--faint)}
+.dbar .tr{height:10px;background:#e9e3d3;border:1px solid var(--line)}
+.dbar .tr i{display:block;height:100%;min-width:2px}
+.back-cap{font-size:12.5px;font-style:italic;color:#453e33;padding:14px 18px;line-height:1.6}
+.back-src{margin-top:auto;font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.1em;color:var(--faint);padding:0 18px 10px}
 .card .tick{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.14em;padding:10px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;color:var(--faint)}
 .card .chead{padding:22px 18px 6px}
 .card .hood{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;color:var(--stamp);text-transform:uppercase}
@@ -130,6 +157,7 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
   <!-- 커버 -->
   <div class="screen" id="startScr">
     <div class="cover-rule"></div>
+    <div class="jogakbo"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="cover-kicker mono"><span>MISSION PASSPORT</span><span>EST. 2026</span></div>
     <div class="cover-title">How <em>local</em><br>are you, really?</div>
     <div class="cover-sub">Eighteen missions across the Seoul locals actually live in — each one a Korean phrase, a place the data found, a thing to do. Swipe right if you've done it. The rest becomes your quest. 당신의 서울 미션 여권입니다.</div>
@@ -154,6 +182,7 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
 
   <!-- 결과: 비자 -->
   <div class="screen" id="resultScr">
+    <div class="jogakbo" style="margin:0 0 2px"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="visa">
       <div class="vh mono"><span>THE SEOUL LOCAL TEST · CERTIFICATE</span><span id="visaDate"></span></div>
       <svg class="vseal" id="visaSeal"></svg>
@@ -196,8 +225,8 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
   </div>
 </div>
 
-<script src="seoul_map.js?v=7"></script>
-<script src="missions.js?v=7"></script>
+<script src="seoul_map.js?v=8"></script>
+<script src="missions.js?v=8"></script>
 <script>
 /* ── 카테고리 인장(원형 스탬프) ── */
 const CAT_SEAL = {
@@ -268,27 +297,95 @@ function updateHud() {
 /* ── 카드 렌더 ── */
 const stack = document.getElementById("stack");
 const SPECIAL = {revisit:"⭐ REVISIT MISSION — TAKES TWO TRIPS", "season-spring":"⌛ SPRING ONLY", "season-winter":"⌛ WINTER ONLY", weather:"🌧 RAIN-DAY MISSION", night:"🌙 NIGHT MISSION", kwave:"K-WAVE"};
+/* 오방색 muted — 미션 성격별 */
+const CAT_COLOR = { talk:"#b0352b", live:"#3d5a73", find:"#b08430" };
+/* 카드 배경 거대 한글 */
+const BGWORD = {1:"이모",2:"잘",3:"시원",4:"덤",5:"성수",6:"수고",7:"한강",8:"단골",9:"노래",10:"골목",11:"산책",12:"노을",13:"소풍",14:"빛",15:"최애",16:"비",17:"벚꽃",18:"눈"};
+
+function backFace(m, color) {
+  const d = m.data || { type: "free" };
+  let big = "", bars = "", cap = "";
+  if (d.type === "lgi") {
+    const demand = Math.round((1 - d.naviRank / d.naviTotal) * 100);
+    big = `<div class="n disp">${d.lgi.toFixed(2)}</div><div class="l">LOCAL GAP INDEX · 로컬 갭 지수</div>`;
+    bars = `
+      <div class="dbar"><div class="lb"><span>KOREANS' NAVI DEMAND</span><span>#${d.naviRank} of ${d.naviTotal}</span></div>
+        <div class="tr"><i style="width:${demand}%;background:${color}"></i></div></div>
+      <div class="dbar"><div class="lb"><span>TOURIST VISIT SHARE</span><span>${d.touristShare}%</span></div>
+        <div class="tr"><i style="width:${Math.max(2, d.touristShare * 2)}%;background:#8a8272"></i></div></div>`;
+    cap = "Koreans drive here all the time. Tourist rankings barely mention it. That gap is why you're being sent.";
+  } else if (d.type === "surge") {
+    const w = Math.max(2, Math.round(d.visitors / 4958912 * 100));
+    big = `<div class="n disp">+${d.growth}%</div><div class="l">FOREIGN VISITORS · ONE YEAR · ${d.dong}</div>`;
+    bars = `
+      <div class="dbar"><div class="lb"><span>MYEONGDONG</span><span>4.96M</span></div>
+        <div class="tr"><i style="width:100%;background:#8a8272"></i></div></div>
+      <div class="dbar"><div class="lb"><span>THIS NEIGHBORHOOD</span><span>${Math.round(d.visitors/1000)}K · 1/${d.vsMyeongdong} of Myeongdong</span></div>
+        <div class="tr"><i style="width:${w}%;background:${color}"></i></div></div>`;
+    cap = "Foreigners are just starting to find this place. You're early — that's the whole point.";
+  } else if (d.type === "anchor") {
+    big = `<div class="n disp">${d.touristShare}%</div><div class="l">OF ALL TOURIST VISITS IN THIS DISTRICT</div>`;
+    bars = `
+      <div class="dbar"><div class="lb"><span>VISIT CONCENTRATION</span><span>${d.touristShare}%</span></div>
+        <div class="tr"><i style="width:${d.touristShare}%;background:${color}"></i></div></div>`;
+    cap = d.condition
+      ? `Everyone comes here — but the window is <b>${d.condition}</b>. The place is easy; the timing is the mission.`
+      : "Everyone comes here. Low points — the mission isn't finding it, it's doing it like a local.";
+  } else {
+    big = `<div class="n disp">印</div><div class="l">NO FIXED PLACE · 장소 불문</div>`;
+    bars = "";
+    cap = d.condition
+      ? `Scored on the act, not the address. Condition: <b>${d.condition}</b>.`
+      : "Scored on the act, not the address. Speaking Korean out loud is the rarest move a tourist makes.";
+  }
+  return `
+    <div class="back-h"><span>WHY HERE · 데이터</span><span>+${m.pts} PTS</span></div>
+    <div class="back-big">${big}</div>
+    ${bars ? `<div class="dbars">${bars}</div>` : ""}
+    <div class="back-cap">${cap}</div>
+    <div class="back-src">SOURCE · KOREA TOURISM DATA LAB (KTO) · 2025.08–2026.07</div>
+    <button class="flipchip fc-back">↩ BACK TO MISSION</button>
+    <div style="height:12px"></div>`;
+}
+
 function makeCard(idx, pos) {
   const m = MISSIONS[idx];
   const el = document.createElement("div");
   el.className = "card" + (pos === 1 ? " behind1" : pos === 2 ? " behind2" : "");
   el.dataset.idx = idx;
   const catSeal = m.cat === "talk" ? "human" : m.cat === "live" ? "daily" : "hidden";
+  const color = CAT_COLOR[m.cat] || "#b0352b";
   el.innerHTML = `
-    <div class="tick mono"><span>MISSION NO. ${String(idx + 1).padStart(2, "0")} / ${MISSIONS.length}</span><span>+${m.pts} PTS</span></div>
-    <div class="chead">
-      <div class="hood mono">${m.place.hood} · ${m.place.en}</div>
-      <div class="nm disp">“${m.phrase.ko}”</div>
-      <div class="ko">${m.phrase.rom} — ${m.phrase.en}</div>
+   <div class="cin">
+    <div class="cface front">
+      <div class="tick mono"><span>MISSION NO. ${String(idx + 1).padStart(2, "0")} / ${MISSIONS.length}</span><span style="color:${color}">+${m.pts} PTS</span></div>
+      <div class="chead">
+        <div class="hood mono" style="color:${color}">${m.place.hood} · ${m.place.en}</div>
+        <span class="slabel" style="padding-top:10px">SAY · 말하기</span>
+        <div class="nm disp">“${m.phrase.ko}”</div>
+        <div class="ko"><b>${m.phrase.rom}</b> — ${m.phrase.en}</div>
+      </div>
+      <div class="rule"></div>
+      <div class="hk"><span class="slabel" style="font-style:normal">DO · 미션</span>${m.how}</div>
+      <button class="flipchip fc-front">WHY HERE? — <b>SEE THE DATA ↻</b></button>
+      <div class="bgword">${BGWORD[m.id] || ""}</div>
+      <div class="cfoot">
+        ${m.special && SPECIAL[m.special] ? `<span class="season-note mono">${SPECIAL[m.special]}</span>` : `<span></span>`}
+        ${sealSVG(catSeal, idx)}
+      </div>
     </div>
-    <div class="rule"></div>
-    <div class="hk">${m.how}</div>
-    <div class="cfoot">
-      ${m.special && SPECIAL[m.special] ? `<span class="season-note mono">${SPECIAL[m.special]}</span>` : `<span class="season-note mono" style="border-color:var(--faint);color:var(--faint)">📊 ${m.basis.slice(0,42)}</span>`}
-      ${sealSVG(catSeal, idx)}
-    </div>
+    <div class="cface back">${backFace(m, color)}</div>
+   </div>
     <span class="stamp yes mono">DONE ✓</span>
     <span class="stamp no mono">LATER</span>`;
+  el.querySelectorAll(".flipchip").forEach(b => {
+    b.addEventListener("pointerdown", e => e.stopPropagation());
+    b.addEventListener("click", e => {
+      e.stopPropagation();
+      el.classList.toggle("flipped");
+      if (el.classList.contains("flipped") && window.gtag) gtag('event', 'view_data', { mission: m.id });
+    });
+  });
   return el;
 }
 function renderStack() {
