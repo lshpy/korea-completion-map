@@ -1,5 +1,5 @@
-/* Seoul Completion Map — 카드 덱 18장 (2026-08-14 컷)
-   essential/hidden/night 훅 수치 = 데이터랩 공식 데이터. 전체 풀은 분석/derived 파일 참조 */
+/* Seoul Completion Map — 18-card deck (cut of 2026-08-14)
+   Hook figures for essential/hidden/night cards = official Data Lab data. See the analysis/derived files for the full pool */
 const CARDS = [
  {
   "en": "Gyeongbokgung & Bukak Skyway",

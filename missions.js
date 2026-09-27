@@ -1,8 +1,8 @@
-/* The Seoul Local Test — 미션 덱 18 (2026-08-14, data v2)
-   pts = ERI(Experience Rarity Index): 2 + 장소희소성(8×LGI 또는 8×(1-외국인노출)) + 조건희소성 + 상호작용
-   LGI(Local Gap Index) = 내비 실수요 백분위 × (1 - 관광객 방문비중/구내최대) — 데이터랩 검색순위(구별 최대 501곳)×인기관광지(KT)
-   외국인노출(FE) = 동 외국인 관광객수 / 명동(4,958,912명) — 데이터랩 방문자 급등동네
-   data{} = 카드 뒷면 차트용 원자료 */
+/* The Seoul Local Test — 18-mission deck (2026-08-14, data v2)
+   pts = ERI (Experience Rarity Index): 2 + place rarity (8×LGI or 8×(1 - foreigner exposure)) + condition rarity + interaction
+   LGI (Local Gap Index) = navigation-demand percentile × (1 - tourist visit share / district max) — Data Lab search ranking (up to 501 places per district) × popular tourist spots (KT)
+   Foreigner exposure (FE) = foreign tourists in the dong / Myeong-dong (4,958,912) — Data Lab neighbourhoods with surging visitors
+   data{} = raw data for the card-back charts */
 const MISSIONS = [
  {
   "id": 1,

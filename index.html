@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Noto+Serif+KR:wght@400;600;900&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
-<!-- GA4: 배포 시 측정 ID 교체 후 주석 해제
+<!-- GA4: replace the measurement ID and uncomment on deployment
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXX');</script> -->
 <style>
@@ -23,7 +23,7 @@ body{font-family:"Noto Serif KR",Georgia,serif;background:var(--paper);color:var
 .disp{font-family:"Instrument Serif","Noto Serif KR",serif}
 .app{max-width:430px;margin:0 auto;min-height:100dvh;display:flex;flex-direction:column;position:relative}
 
-/* ── 상단바 ── */
+/* ── Top bar ── */
 .topbar{position:sticky;top:0;z-index:20;background:rgba(243,239,229,.96);display:flex;align-items:center;gap:12px;padding:12px 16px;border-bottom:1.5px solid var(--ink)}
 .topbar .tt{flex:1}
 .topbar .tt b{font-family:"IBM Plex Mono",monospace;font-size:11.5px;font-weight:600;letter-spacing:.14em;display:block}
@@ -34,13 +34,13 @@ body{font-family:"Noto Serif KR",Georgia,serif;background:var(--paper);color:var
 .pct{font-family:"Instrument Serif",serif;font-size:22px;min-width:52px;text-align:right}
 .gu-mini{fill:#e6e0d0;stroke:var(--paper);stroke-width:1.2;transition:fill .4s}
 
-/* ── 화면 공통 ── */
+/* ── Shared screen styles ── */
 .screen{flex:1;display:flex;flex-direction:column;padding:0 18px 24px}
 .bigbtn{border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);padding:16px;font-size:15px;font-weight:600;font-family:"IBM Plex Mono",monospace;letter-spacing:.1em;cursor:pointer;text-transform:uppercase}
 .bigbtn:active{transform:scale(.985)}
 .ghostbtn{border:1.5px solid var(--line);background:transparent;color:var(--faint);padding:13px;font-size:12.5px;font-family:"IBM Plex Mono",monospace;letter-spacing:.06em;cursor:pointer}
 
-/* ── 스타트: 매거진 커버 ── */
+/* ── Start: magazine cover ── */
 #startScr{justify-content:center;gap:0;text-align:left}
 .cover-rule{border-top:2.5px solid var(--ink);margin:10px 0 0}
 .cover-kicker{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.22em;padding:10px 0 4px;display:flex;justify-content:space-between}
@@ -53,14 +53,14 @@ body{font-family:"Noto Serif KR",Georgia,serif;background:var(--paper);color:var
 .endow p b{color:var(--ink);font-weight:600}
 .cover-note{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.08em;color:var(--faint);padding-top:14px;text-align:center}
 
-/* ── 조각보 스트립 (오방색 muted) ── */
+/* ── Jogakbo (patchwork) strip, muted obangsaek colours ── */
 .jogakbo{display:grid;grid-template-columns:2fr 1fr 1.6fr 1fr 1.3fr 1fr;gap:2px;background:var(--ink);border:1.5px solid var(--ink);height:14px;margin:12px 0 0}
 .jogakbo i{display:block}
 .jogakbo i:nth-child(1){background:#b0352b}.jogakbo i:nth-child(2){background:#f3efe5}
 .jogakbo i:nth-child(3){background:#3d5a73}.jogakbo i:nth-child(4){background:#c19a3d}
 .jogakbo i:nth-child(5){background:#6f8f7a}.jogakbo i:nth-child(6){background:#f3efe5}
 
-/* ── 카드 덱: 옛 티켓/여권 낱장 ── */
+/* ── Card deck: old ticket / passport page look ── */
 #deckScr{display:none;padding-top:16px}
 .stack{position:relative;flex:1;min-height:400px;max-height:490px;perspective:1400px}
 .card{position:absolute;inset:0;touch-action:none;user-select:none;background:transparent}
@@ -72,7 +72,7 @@ body{font-family:"Noto Serif KR",Georgia,serif;background:var(--paper);color:var
 .slabel{font-family:"IBM Plex Mono",monospace;font-size:8.5px;letter-spacing:.24em;color:var(--faint);display:block;padding-bottom:2px}
 .flipchip{margin:10px 18px 0;border:1px dashed var(--faint);background:transparent;color:var(--faint);padding:7px 10px;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.12em;cursor:pointer;text-transform:uppercase;text-align:left}
 .flipchip b{color:var(--stamp)}
-/* 카드 뒷면: 데이터 */
+/* Card back: data */
 .back-h{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.18em;padding:12px 16px;border-bottom:1px solid var(--line);color:var(--faint);display:flex;justify-content:space-between}
 .back-big{padding:20px 18px 4px}
 .back-big .n{font-family:"Instrument Serif",serif;font-size:54px;line-height:1;color:var(--stamp)}
@@ -105,7 +105,7 @@ body{font-family:"Noto Serif KR",Georgia,serif;background:var(--paper);color:var
 .sb:active{transform:scale(.94)}
 .swipehint{text-align:center;font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.1em;color:var(--faint);padding-top:9px;text-transform:uppercase}
 
-/* ── 결과: 비자 페이지 ── */
+/* ── Result: visa page ── */
 #resultScr{display:none;gap:14px;padding-top:16px;padding-bottom:44px}
 .visa{background:var(--paper2);border:1.5px solid var(--ink);padding:22px 20px;position:relative}
 .visa .vh{font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.2em;color:var(--faint);display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:10px}
@@ -154,7 +154,7 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
     <div class="pct disp" id="pctLive">2%</div>
   </div>
 
-  <!-- 커버 -->
+  <!-- Cover -->
   <div class="screen" id="startScr">
     <div class="cover-rule"></div>
     <div class="jogakbo"><i></i><i></i><i></i><i></i><i></i><i></i></div>
@@ -170,7 +170,7 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
     <div class="cover-note">SOURCE · KOREA TOURISM DATA LAB (KTO) · MAP · KOSTAT</div>
   </div>
 
-  <!-- 카드 덱 -->
+  <!-- Card deck -->
   <div class="screen" id="deckScr">
     <div class="stack" id="stack"></div>
     <div class="swipebtns">
@@ -180,7 +180,7 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
     <div class="swipehint">swipe — left: on my quest list · right: done it</div>
   </div>
 
-  <!-- 결과: 비자 -->
+  <!-- Result: visa -->
   <div class="screen" id="resultScr">
     <div class="jogakbo" style="margin:0 0 2px"><i></i><i></i><i></i><i></i><i></i><i></i></div>
     <div class="visa">
@@ -228,7 +228,7 @@ footer{text-align:center;font-size:10px;color:var(--faint);line-height:1.7;paddi
 <script src="seoul_map.js?v=9"></script>
 <script src="missions.js?v=9"></script>
 <script>
-/* ── 카테고리 인장(원형 스탬프) ── */
+/* ── Category seals (round stamps) ── */
 const CAT_SEAL = {
   essential:{txt:"OFFICIAL KTO DATA", c:"#3d4b60"},
   hidden:{txt:"HIDDEN GEM · RARITY", c:"#8f7440"},
@@ -294,15 +294,15 @@ function updateHud() {
   paintMaps();
 }
 
-/* ── 카드 렌더 ── */
+/* ── Card rendering ── */
 const stack = document.getElementById("stack");
 const SPECIAL = {revisit:"⭐ REVISIT MISSION — TAKES TWO TRIPS", "season-spring":"⌛ SPRING ONLY", "season-winter":"⌛ WINTER ONLY", weather:"🌧 RAIN-DAY MISSION", night:"🌙 NIGHT MISSION", kwave:"K-WAVE"};
-/* 오방색 muted — 미션 성격별 */
+/* Muted obangsaek colours, by mission type */
 const CAT_COLOR = { talk:"#b0352b", live:"#3d5a73", find:"#b08430" };
-/* 카드 배경 거대 한글 */
+/* Large Hangul word in the card background */
 const BGWORD = {1:"이모",2:"잘",3:"시원",4:"덤",5:"성수",6:"수고",7:"한강",8:"단골",9:"노래",10:"골목",11:"산책",12:"노을",13:"소풍",14:"빛",15:"최애",16:"비",17:"벚꽃",18:"눈"};
 
-/* ERI 점수 분해 (분석/eri_점수.json) — {장소(0~8), 조건(0~6), 상호작용(1~3)} */
+/* ERI score breakdown (from analysis file eri_점수.json) — {place (0-8), condition (0-6), interaction (1-3)} */
 const ERI = {1:[7.9,0,3],2:[2,0,3],3:[7.9,1,3],4:[7.6,0,3],5:[6.7,0,3],6:[2,0,3],7:[0,0,2],8:[2,6,2],9:[2,0,2],10:[2,0,2],11:[7.4,0,1],12:[5.7,0,1],13:[0,0,1],14:[7.1,0,1],15:[6.9,0,1],16:[2,4,2],17:[0,6,1],18:[0.1,6,1]};
 const COND_LABEL = {revisit:"TWO VISITS", weather:"RAIN DAY", night:"AFTER DARK", "season-spring":"2 WEEKS / YEAR", "season-winter":"A FEW DAYS / YEAR"};
 function eriBars(m, color) {
@@ -511,7 +511,7 @@ document.getElementById("wishBtn").addEventListener("click", async () => {
   if (window.gtag) gtag('event', 'save_wishlist');
 });
 document.getElementById("calBtn").addEventListener("click", () => {
-  // 다음 시즌 창: 봄 벚꽃(4/1~14) 또는 가까운 다음 계절 시작
+  // Next season window: spring cherry blossoms (Apr 1-14) or the start of the nearest next season
   const now = new Date();
   const y = now.getMonth() >= 3 ? now.getFullYear() + 1 : now.getFullYear();
   const list = lastMissed.slice(0, 5).map((m, i) => `${i + 1}. \"${m.c.phrase.ko}\" @ ${m.c.place.en}`).join("\\n");
